@@ -1,17 +1,17 @@
-%option c++
-%option noyywrap
-
 %{
 #include <iostream>
 #include <cstdlib>
+#include "AST.hpp"
+#include "parser.hpp"
 using namespace std;
-enum token_number = { TCONST, IDEN, NUM, ASSIGN, ADD, SEMICOL, DOT, OBRACE, EBRACE, ERROR};
+enum token_number = { TCONST, TIDEN, TINTEGER,TFLOAT, TASSIGN, TADD, TSEMICOL, TDOT, TOBRACE, TEBRACE, TERROR};
 
 %}
 %%
 "const"   return(TCONST);
 "="       return(ASGIN);
-[1-9][0-9]* return(NUM);
+[1-9][0-9]* return(TINTEGER);
+[0-9].[0-9]* return (TFLOAT);
 "{"       return(OBRACE);
 "}"       return(EBRACE);
 %%
