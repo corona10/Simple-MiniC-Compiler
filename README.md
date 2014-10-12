@@ -1,4 +1,4 @@
-SimpleCompiler
+Simple Mini C Compiler
 ==============
 
 
