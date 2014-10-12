@@ -4,6 +4,7 @@
  @date   : 2014-10-12
 **/
 #include <llvm/Value.h>
+#include <stack>
 
 class CBaseAST
 {
@@ -51,4 +52,15 @@ class CFloat      : public CBaseAST
        {
        }
        virtual llvm::Value* codeGen(CodeGenContext& context);
+};
+
+class CIdentifier : public CBaseAST
+{
+      public:
+        std::string iden_name;
+        CIdentifier(const std::string& name)
+                   : iden_name(name)
+        {
+        }
+        virtual llvm::Value* codeGen(CodeGenContext& context);
 };
