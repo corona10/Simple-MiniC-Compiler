@@ -10,7 +10,7 @@ class CBaseAST
 {
       public:
         virtual ~CBaseAST(){}
-        virtual llvm::Value* codeGen(CodeGenContext& context){}
+        virtual llvm::Value* codeGenerate(CodeContext& context){}
 };
 
 class CExpression : public CBaseAST
@@ -29,7 +29,7 @@ class CInteger    : public CBaseAST
                  : value(val)
         {
         }
-        virtual llvm::Value* codeGen(CodeGenContext& context);
+        virtual llvm::Value* codeGenerate(CodeContext& context);
 };
 
 class CDouble     : public CBaseAST
@@ -40,7 +40,7 @@ class CDouble     : public CBaseAST
               : value(val)
        {
        }
-       virtual llvm::Value* codeGen(CodeGenContext& context);
+       virtual llvm::Value* codeGenerate(CodeContext& context);
 };
 
 class CFloat      : public CBaseAST
@@ -51,7 +51,7 @@ class CFloat      : public CBaseAST
              :value(val)
        {
        }
-       virtual llvm::Value* codeGen(CodeGenContext& context);
+       virtual llvm::Value* codeGenerate(CodeContext& context);
 };
 
 class CIdentifier : public CBaseAST
@@ -62,5 +62,5 @@ class CIdentifier : public CBaseAST
                    : iden_name(name)
         {
         }
-        virtual llvm::Value* codeGen(CodeGenContext& context);
+        virtual llvm::Value* codeGenerate(CodeContext& context);
 };
