@@ -57,7 +57,7 @@ class CFloat      : public CBaseAST
 class CIdentifier : public CBaseAST
 {
       public:
-        std::string iden_name;
+        std::string ident_name;
         CIdentifier(const std::string& name)
                    : iden_name(name)
         {
