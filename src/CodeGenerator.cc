@@ -1,6 +1,5 @@
-#inlcude "CodeGenerator.hpp"
-
-using namespace llvm;
+#include "CodeGenerator.hpp"
+#include "AST.hpp"
 
 GenericValue CodeGenerator::runCode()
 {
@@ -31,4 +30,14 @@ CodeBlock*  CodeGenerator::popStack()
 void CodeGenerator::pushStack(CodeBlock *block)
 {
     this.block_stack.push(block);
+}
+
+void CodeGenerator::GenerateCode()
+{
+     std::cout<<"Now Generatring Code...."<<std::endl;
+
+     FunctionType *ftype = FuntionType::get(Type::getInt32Ty
+     this._mainFunc = llvm::Function::Create(this._globalContext, "main", this._module);
+     BasicBlock *BB = BasicBlock::Create(this._globalContext, "EntryBlock", this._mainFunc);
+
 }

@@ -17,6 +17,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace llvm;
+
 class  CodeBlock
 {
     public:
@@ -25,19 +27,24 @@ class  CodeBlock
 };
 
 class  CodeGenerator{
+
        public:
        
        std::stack<*CodeBlock> block_stack;
        CodeGenerator()
        {
-          this._module = new Module("main", getGlobalContext());
+          this._globalContext = getGlobalContext();
+          this._module = new Module("main", this._globalContext);
+          
        }
    
        llvm::GenericValue runCode();
-      
+       void GenerateCode();
+
        private:
        llvm::Function* _mainFunc;
        llvm::Module*   _module;
+       llvm::Context   _globalContext; 
        
        CodeBlock* popStack();
        void pushStack(CodeBlock* block); 

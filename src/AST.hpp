@@ -10,7 +10,7 @@ class CBaseAST
 {
       public:
         virtual ~CBaseAST(){}
-        virtual llvm::Value* codeGenerate(CodeContext& context){}
+        virtual llvm::Value* codeGenerate(CodeContext& context) = 0;
 };
 
 class CExpression : public CBaseAST
@@ -63,4 +63,22 @@ class CIdentifier : public CBaseAST
         {
         }
         virtual llvm::Value* codeGenerate(CodeContext& context);
+};
+
+class CBlock    : public CBaseAST
+{
+      public:
+      StatementList statement_list;
+
+      CBlcok()
+      {
+      }
+      virtual llvm::Value* codeGenerate(CodeContext& context);
+
+};
+
+class CFunctionCall   : public CBaseAST
+{
+      public:
+
 };
