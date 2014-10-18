@@ -16,19 +16,31 @@
 // library list of std
 #include <iostream>
 #include <vector>
+
+class  CodeBlock
+{
+    public:
+    llvm::BasicBlock *block;
+    std::map<std::string, llvm::Value*> block_map;
+};
+
 class  CodeGenerator{
        public:
-    
+       
+       std::stack<*CodeBlock> block_stack;
        CodeGenerator()
        {
           this._module = new Module("main", getGlobalContext());
        }
    
-       GenericValue runCode();
-
+       llvm::GenericValue runCode();
+      
        private:
-       Function* _mainFunc;
-       Module*   _module;
+       llvm::Function* _mainFunc;
+       llvm::Module*   _module;
+       
+       CodeBlock* popStack();
+       void pushStack(CodeBlock* block); 
 
 };
 

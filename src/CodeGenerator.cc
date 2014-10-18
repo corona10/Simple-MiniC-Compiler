@@ -14,3 +14,21 @@ GenericValue CodeGenerator::runCode()
     return gv;        
 
 }
+
+CodeBlock*  CodeGenerator::popStack()
+{
+  CodeBlock* value = null;
+  if(!this.block_stack.empty())
+  {
+
+     value = this.block_stack.pop();
+  }
+
+  return value;
+
+}
+
+void CodeGenerator::pushStack(CodeBlock *block)
+{
+    this.block_stack.push(block);
+}
