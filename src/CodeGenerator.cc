@@ -8,7 +8,7 @@ GenericValue CodeGenerator::runCode()
     ExectionEngine *EE = ExectuionEngine::create(EMP, false);
     std::vector <GenericValue> gv_vec;
    
-    GenericValue gv = EE->runFunction(mainFunc, gv_vec);
+    GenericValue gv = EE->runFunction(this._mainFunc, gv_vec);
 
     return gv;        
 
