@@ -13,6 +13,9 @@ class CBaseAST
         virtual llvm::Value* codeGenerate(CodeContext& context) = 0;
 };
 
+typedef CBaseAST CExpression;
+typedef CBaseAST CStatement;
+
 class CExpression : public CBaseAST
 {
 };
@@ -80,5 +83,7 @@ class CBlock    : public CBaseAST
 class CFunctionCall   : public CBaseAST
 {
       public:
+      const CIdentifier& id;
+      virtual llvm::Value* codeGenerate(CodeContext& context);
 
 };
