@@ -1,3 +1,7 @@
+D       [0-9]
+L       [a-zA-Z_]
+H       [a-fA-FO-9]
+
 %{
 #include <cstdlib>
 #include "AST.hpp"
@@ -6,7 +10,7 @@
 %}
 %%
 "const"   return(TCONST);
-"="       return(TASGIN);
+"="       return(TASIGN);
 "=="      return (TEQUAL);
 "!"       return (TNOT);
 "!="      return (TNEQUAL);
@@ -19,17 +23,13 @@
 "*"       return (TMULTI);
 "/"       return (TDIVIDE);
 "%"       return (TMODULO);
+"return"  return (TRETURN);
 
 %%
-extern "C" int yywrap();
 
-int main()
+yywrap()
 {
-   cout<<"Start Of LEX"<<endl;
-   return 0;
+     return 1;
 }
 
-int yywrap()
-{
-   return 1;
-}
+

@@ -16,14 +16,6 @@ class CBaseAST
 typedef CBaseAST CExpression;
 typedef CBaseAST CStatement;
 
-class CExpression : public CBaseAST
-{
-};
-
-class CStatement  : public CBaseAST
-{
-};
-
 class CInteger    : public CBaseAST
 {
       public:
@@ -71,7 +63,7 @@ class CIdentifier : public CBaseAST
 class CBlock    : public CBaseAST
 {
       public:
-      StatementList statement_list;
+      std::vector<CStatement> statement_list;
 
       CBlcok()
       {
