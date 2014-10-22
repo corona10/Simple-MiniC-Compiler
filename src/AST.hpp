@@ -19,8 +19,8 @@ typedef CBaseAST CStatement;
 class CInteger    : public CBaseAST
 {
       public:
-        size_t value;
-        CInteger(size_t val)
+        int value;
+        CInteger(int val)
                  : value(val)
         {
         }
@@ -54,7 +54,7 @@ class CIdentifier : public CBaseAST
       public:
         std::string ident_name;
         CIdentifier(const std::string& name)
-                   : iden_name(name)
+                   : ident_name(name)
         {
         }
         virtual llvm::Value* codeGenerate(CodeContext& context);
@@ -78,4 +78,10 @@ class CFunctionCall   : public CBaseAST
       const CIdentifier& id;
       virtual llvm::Value* codeGenerate(CodeContext& context);
 
+};
+
+class CFunctionDeclare : public CBaseAST
+{
+      public:
+      virtual llvm::Value* codeGenertate(CodeContext& context);
 };

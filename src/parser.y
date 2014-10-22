@@ -14,6 +14,7 @@
 
 %left TPLUS, TMINUS
 %left TMUL, TDIV
+%right TEQUAL
 
 %start program
 
@@ -30,15 +31,18 @@ stmt    : var_decl
         | func_decl
         | expr { $$ = new CExpressionStatement(*$1);}
         ;
-unary_operator:TASIGN
-              |TEQUAL
-              |TNOT
-              |TNEQUAL
-              |TPLUS
-              |TMINUS
-              |TMULTI
-              |TDIVIDE
-              |TMODULO
-              ;
+unary_operator :TASIGN
+               |TEQUAL
+               |TNOT
+               |TNEQUAL
+               |TPLUS
+               |TMINUS
+               |TMULTI
+               |TDIVIDE
+               |TMODULO
+               ;
+block   : '{' stmts '}' { $$ = $2}
+        | '{' '}' { $$ = new CBlock()}
+        ;
 
 %%

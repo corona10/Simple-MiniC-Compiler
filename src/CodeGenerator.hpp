@@ -44,7 +44,7 @@ class  CodeGenerator{
        private:
        llvm::Function* _mainFunc;
        llvm::Module*   _module;
-       llvm::Context   _globalContext; 
+       llvm::LLVMContext   _globalContext; 
        
        CodeBlock* popStack();
        void pushStack(CodeBlock* block); 
