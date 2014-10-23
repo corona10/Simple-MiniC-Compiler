@@ -36,6 +36,14 @@ stmt    : var_decl
         | func_decl
         | expr { $$ = new CExpressionStatement(*$1);}
         ;
+
+var_decl : type ident assignment ';'
+         | type ident '='  ';'
+         ;
+
+assignment : ident '=' assignmet
+           | ident '=' function_call
+
 unary_operator :TASIGN
                |TEQUAL
                |TNOT
@@ -49,7 +57,10 @@ unary_operator :TASIGN
 block   : '{' stmts '}' { $$ = $2}
         | '{' '}' { $$ = new CBlock()}
         ;
+ident   : TIDENT{ $$ = new CIdentifier(*$1); delete $1;}
 
+function : type ident '{' stmt '}'
+         ;
 %%
 #include <iostream>
 

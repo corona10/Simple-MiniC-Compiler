@@ -16,7 +16,7 @@ class CBaseAST
 typedef CBaseAST CExpression;
 typedef CBaseAST CStatement;
 
-class CInteger    : public CBaseAST
+class CInteger : public CBaseAST
 {
       public:
         int value;
@@ -27,7 +27,7 @@ class CInteger    : public CBaseAST
         virtual llvm::Value* codeGenerate(CodeContext& context);
 };
 
-class CDouble     : public CBaseAST
+class CDouble : public CBaseAST
 {
       public:
        double value;
@@ -38,7 +38,7 @@ class CDouble     : public CBaseAST
        virtual llvm::Value* codeGenerate(CodeContext& context);
 };
 
-class CFloat      : public CBaseAST
+class CFloat : public CBaseAST
 {
       public:
        float value;
@@ -60,19 +60,19 @@ class CIdentifier : public CBaseAST
         virtual llvm::Value* codeGenerate(CodeContext& context);
 };
 
-class CBlock    : public CBaseAST
+class CBlock : public CBaseAST
 {
       public:
       std::vector<CStatement> statement_list;
 
-      CBlcok()
+      CBlock()
       {
       }
       virtual llvm::Value* codeGenerate(CodeContext& context);
 
 };
 
-class CFunctionCall   : public CBaseAST
+class CFunctionCall : public CBaseAST
 {
       public:
       const CIdentifier& id;

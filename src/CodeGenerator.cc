@@ -52,22 +52,33 @@ void CodeGenerator::GenerateCode()
 /**
  get함수의 마지막 인자를 FALSE로 바꾸면 unsigned값을 반환한다.
 **/
-Value* CInteger::generateCode(CodeGenerator& context)
+llvm::Value* CInteger::generateCode(CodeGenerator& context)
 {
    return ConstantInt::get(Type::getInt32Ty(getGlobalContext()), this.value, true);
 }
 
-Value* CDouble::generateCode(CodeGenerator& context)
+llvm::Value* CDouble::generateCode(CodeGenerator& context)
 {
   return ConstantFP::get(Type::getDoubleTy(getGlobalContext()), this.value, true);
 }
 
-Value* CFloat::generateCode(CodeGenerator& context)
+llvm::Value* CFloat::generateCode(CodeGenerator& context)
 {
-    return ConstantFP::get(Type::getFloatTy(getGlobalContext(), this.value, true)
+    return ConstantFP::get(Type::getFloatTy(getGlobalContext(), this.value, true);
 }
 
-Value* CIdentfier::generateCode(CodeGenerator& context)
+llvm::Value* CIdentifier::generateCode(CodeGenerator& context)
 {
      std::cout<<"Create Identifier: "<< this.name <<std::endl;
+}
+
+llvm::Value* CBlock::generateCode(CodeGeneratr& context)
+{
+     std::cout<<"Generate Code Block.."<<std::endl;
+     auto iter = this.statement_list.begin();
+     
+     while(iter != this.statement_list.end())
+     {
+           iter++;
+     }
 }
