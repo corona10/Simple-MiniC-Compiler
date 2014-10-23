@@ -20,8 +20,13 @@
 
 %%
 
-program : stmts { programBlock = $1 }
+program : function
+        | declaration
         ;
+type    : TINT
+        | TFLOAT
+        | TDOUBLE
+        | TVOID
 
 stmts   : stmt { $$ = new CBlock(); $$->statements.push_back($<stmt>1);}
         | stmts stmt {$1->statemets.push_back($<stmt>2);}
@@ -46,3 +51,18 @@ block   : '{' stmts '}' { $$ = $2}
         ;
 
 %%
+#include <iostream>
+
+int main(int argc, char* argv[])
+{
+    yyin = fopen(argv[1] "r");
+    
+     if(yypare() == true)
+        std::cout<<"Parsing Completed!!"<<std::endl;
+     else
+        std::cout<<"Parsing Failed!!"<<std::endl;
+
+    fclose(yyin);
+
+    return 0;
+}

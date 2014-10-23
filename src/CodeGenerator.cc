@@ -66,3 +66,8 @@ Value* CFloat::generateCode(CodeGenerator& context)
 {
     return ConstantFP::get(Type::getFloatTy(getGlobalContext(), this.value, true)
 }
+
+Value* CIdentfier::generateCode(CodeGenerator& context)
+{
+     std::cout<<"Create Identifier: "<< this.name <<std::endl;
+}
