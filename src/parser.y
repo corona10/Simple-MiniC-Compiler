@@ -38,10 +38,16 @@
 program : function
         | declaration
         ;
+
+declaration : function_call ';'
+            | var_decl ';'
+            ;
+        
 type    : TINT
         | TFLOAT
         | TDOUBLE
         | TVOID
+        ;
 
 stmts   : stmt { $$ = new CBlock(); $$->statements.push_back($<stmt>1);}
         | stmts stmt {$1->statemets.push_back($<stmt>2);}
@@ -52,10 +58,17 @@ stmt    : var_decl
         | expr { $$ = new CExpressionStatement(*$1);}
         ;
 
-var_decl : type ident ';'
-         | type ident '=' number ';'
+var_decl : type ident { $$ = new CVariableDeclartion(*$1, *$2); }
+         | type ident '=' number
          ;
 
+compound_stmt : '{' stmt_list '}' 
+              ;
+ 
+function_call : ident '(' ')'
+              ;
+function : type ident '(' ')' compound_stmt
+         ;
 number   : TINTIEGER { $$ = new CInteger(stol($1)); delete $1;}
          : TFLOAT    { $$ = new CFloat(stof($1));  delete $1;}
          : TDOUBLE   { $$ = new CDouble(stof($1)); delete $1;}

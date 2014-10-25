@@ -80,6 +80,19 @@ class CFunctionCall : public CBaseAST
 
 };
 
+class CAssignment : public CBaseAST
+{
+      public:
+      CIdentifier& lhs;
+      CExpression& rhs;
+
+      CAssignment(CIdenrifier& ident, CExpression& express)
+                 : lhs(ident), rhs(express)
+      {
+      }
+
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+};
 class CFunctionDeclare : public CBaseAST
 {
       public:

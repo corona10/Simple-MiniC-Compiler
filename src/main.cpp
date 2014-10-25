@@ -2,6 +2,7 @@
 #include "CodeGenerator.hpp"
 #include "AST.hpp"
 
+extern int yyparse();
 using namespace std;
 
 int main()
@@ -11,6 +12,6 @@ int main()
     CodeGenerator codegen;
     codegen.generateCode();
 
-    //codegen.runCode();
+    codegen.runCode();
     return 0;
 }

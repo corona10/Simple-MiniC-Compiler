@@ -71,6 +71,12 @@ llvm::Value* CFloat::generateCode(CodeGenerator& codegen)
     return ConstantFP::get(Type::getFloatTy(getGlobalContext(), this.value, true);
 }
 
+llvm::Value* CAssignment::generateCode(CodeGenerator& codegen)
+{
+    std::string lhs_name =  lhs.name;
+    std::cout<<"Assignmet to "<<lhs_name <<std::endl;
+    return new StoreInst(rhs.generateCode(codegen), codegen.locals()[lhs_name], flase, codegen.GetCurrentBlock()); 
+}
 llvm::Value* CIdentifier::generateCode(CodeGenerator& codegen)
 {
      std::cout<<"Create Identifier: "<< this.name <<std::endl;

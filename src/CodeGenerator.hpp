@@ -41,6 +41,15 @@ class  CodeGenerator{
        llvm::GenericValue runCode();
        void GenerateCode();
 
+       BasicBlock* getCurrentBlock()
+       {
+          BasicBlock* blk = this.block_stack.top()->block;
+          return blk;
+       }
+       std::map<std::string, llvm::Value*>& getBlkmap()
+       {
+          return this.block_Stack.top()->block_map;
+       }
        private:
        llvm::Function* _mainFunc;
        llvm::Module*   _module;

@@ -1,7 +1,3 @@
-D       [0-9]
-L       [a-zA-Z_]
-H       [a-fA-FO-9]
-
 %{
 #include <cstdlib>
 #include "AST.hpp"
@@ -9,7 +5,6 @@ H       [a-fA-FO-9]
 
 %}
 %%
-"const"   return(TCONST);
 "="       return(TASIGN);
 "=="      return (TEQUAL);
 "!"       return (TNOT);
