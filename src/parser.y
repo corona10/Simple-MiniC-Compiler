@@ -9,6 +9,19 @@
 
 %}
 
+%union
+{
+   CBlock* block;
+   CIdentifier* ident;
+   CFuntionCall* func_call;
+   
+   CInteger *tint;
+   CFloat *tfloat;
+   CDouble *tdoule;
+   int token;  
+   
+}
+
 %type <stmt> stmt var_decl funcl_decl
 %type <block> program stmts
 
@@ -17,6 +30,8 @@
 %right TEQUAL
 
 %start program
+
+
 
 %%
 
@@ -37,13 +52,14 @@ stmt    : var_decl
         | expr { $$ = new CExpressionStatement(*$1);}
         ;
 
-var_decl : type ident assignment ';'
-         | type ident '='  ';'
+var_decl : type ident ';'
+         | type ident '=' number ';'
          ;
 
-assignment : ident '=' assignmet
-           | ident '=' function_call
-
+number   : TINTIEGER { $$ = new CInteger(stol($1)); delete $1;}
+         : TFLOAT    { $$ = new CFloat(stof($1));  delete $1;}
+         : TDOUBLE   { $$ = new CDouble(stof($1)); delete $1;}
+         ;
 unary_operator :TASIGN
                |TEQUAL
                |TNOT
@@ -59,8 +75,6 @@ block   : '{' stmts '}' { $$ = $2}
         ;
 ident   : TIDENT{ $$ = new CIdentifier(*$1); delete $1;}
 
-function : type ident '{' stmt '}'
-         ;
 %%
 #include <iostream>
 

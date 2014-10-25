@@ -10,7 +10,7 @@ class CBaseAST
 {
       public:
         virtual ~CBaseAST(){}
-        virtual llvm::Value* codeGenerate(CodeContext& context) = 0;
+        virtual llvm::Value* codeGenerate(CodeGenerator& codegen) = 0;
 };
 
 typedef CBaseAST CExpression;
@@ -24,7 +24,7 @@ class CInteger : public CBaseAST
                  : value(val)
         {
         }
-        virtual llvm::Value* codeGenerate(CodeContext& context);
+        virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 };
 
 class CDouble : public CBaseAST
@@ -35,7 +35,7 @@ class CDouble : public CBaseAST
               : value(val)
        {
        }
-       virtual llvm::Value* codeGenerate(CodeContext& context);
+       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 };
 
 class CFloat : public CBaseAST
@@ -46,7 +46,7 @@ class CFloat : public CBaseAST
              :value(val)
        {
        }
-       virtual llvm::Value* codeGenerate(CodeContext& context);
+       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 };
 
 class CIdentifier : public CBaseAST
@@ -57,7 +57,7 @@ class CIdentifier : public CBaseAST
                    : ident_name(name)
         {
         }
-        virtual llvm::Value* codeGenerate(CodeContext& context);
+        virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 };
 
 class CBlock : public CBaseAST
@@ -68,7 +68,7 @@ class CBlock : public CBaseAST
       CBlock()
       {
       }
-      virtual llvm::Value* codeGenerate(CodeContext& context);
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };
 
@@ -76,14 +76,14 @@ class CFunctionCall : public CBaseAST
 {
       public:
       const CIdentifier& id;
-      virtual llvm::Value* codeGenerate(CodeContext& context);
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };
 
 class CFunctionDeclare : public CBaseAST
 {
       public:
-      virtual llvm::Value* codeGenertate(CodeContext& context);
+      virtual llvm::Value* codeGenertate(CodeGenerator& codegen);
 };
 
 class CIdentifier : public CBaseAST
@@ -95,5 +95,18 @@ class CIdentifier : public CBaseAST
       {
       } 
 
-      virtual llvm::Value* codeGenerate(CodeContext& context);
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+};
+
+class CVarDeclareration : public CBaseAST
+{
+      public:
+      CIdentifier ident& type;
+      CIdentifier ident& var_id;
+     
+      CVarDeclareration()
+      {
+      }
+ 
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 }
