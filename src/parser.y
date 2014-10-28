@@ -7,8 +7,9 @@
 %union
 {
    int token;
+   std::string *string;
 }
-%token TINT TFLOAT TIDENT
+%token TINTEGER TFLOAT TIDENT
 %token TLBRACE TRBRACE
 %token TASSIGN TEQUAL TNOT TNEQUAL TLESS TLESSEQ TGREAT TGREATEQ
 %token TPLUS TMINUS TMULTI TDIVIDE TMODULO
@@ -26,7 +27,7 @@ var_decl : ident ident TSEMI { std::cout<<"Variable with out Number"<<std::endl;
 
 ident : TIDENT
       ;
-number: TINT
+number: TINTEGER
       | TFLOAT
       ;
               

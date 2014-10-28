@@ -45,7 +45,7 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    TINT = 258,
+    TINTEGER = 258,
     TFLOAT = 259,
     TIDENT = 260,
     TLBRACE = 261,
@@ -77,8 +77,9 @@ union YYSTYPE
 #line 8 "parser.y" /* yacc.c:1909  */
 
    int token;
+   std::string *string;
 
-#line 82 "parser.hpp" /* yacc.c:1909  */
+#line 83 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

@@ -103,7 +103,7 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    TINT = 258,
+    TINTEGER = 258,
     TFLOAT = 259,
     TIDENT = 260,
     TLBRACE = 261,
@@ -135,8 +135,9 @@ union YYSTYPE
 #line 8 "parser.y" /* yacc.c:355  */
 
    int token;
+   std::string *string;
 
-#line 140 "parser.cpp" /* yacc.c:355  */
+#line 141 "parser.cpp" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -151,7 +152,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 155 "parser.cpp" /* yacc.c:358  */
+#line 156 "parser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -450,7 +451,7 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    23,    23,    24,    27,    29,    30
+       0,    24,    24,    25,    28,    30,    31
 };
 #endif
 
@@ -459,10 +460,11 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "TINT", "TFLOAT", "TIDENT", "TLBRACE",
-  "TRBRACE", "TASSIGN", "TEQUAL", "TNOT", "TNEQUAL", "TLESS", "TLESSEQ",
-  "TGREAT", "TGREATEQ", "TPLUS", "TMINUS", "TMULTI", "TDIVIDE", "TMODULO",
-  "TSEMI", "TMUL", "TDIV", "$accept", "var_decl", "ident", "number", YY_NULLPTR
+  "$end", "error", "$undefined", "TINTEGER", "TFLOAT", "TIDENT",
+  "TLBRACE", "TRBRACE", "TASSIGN", "TEQUAL", "TNOT", "TNEQUAL", "TLESS",
+  "TLESSEQ", "TGREAT", "TGREATEQ", "TPLUS", "TMINUS", "TMULTI", "TDIVIDE",
+  "TMODULO", "TSEMI", "TMUL", "TDIV", "$accept", "var_decl", "ident",
+  "number", YY_NULLPTR
 };
 #endif
 
@@ -1225,19 +1227,19 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 23 "parser.y" /* yacc.c:1646  */
+#line 24 "parser.y" /* yacc.c:1646  */
     { std::cout<<"Variable with out Number"<<std::endl;}
-#line 1231 "parser.cpp" /* yacc.c:1646  */
+#line 1233 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 24 "parser.y" /* yacc.c:1646  */
+#line 25 "parser.y" /* yacc.c:1646  */
     {std::cout<<"Variable with Number!"<<std::endl;}
-#line 1237 "parser.cpp" /* yacc.c:1646  */
+#line 1239 "parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1241 "parser.cpp" /* yacc.c:1646  */
+#line 1243 "parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1465,5 +1467,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 33 "parser.y" /* yacc.c:1906  */
+#line 34 "parser.y" /* yacc.c:1906  */
 
