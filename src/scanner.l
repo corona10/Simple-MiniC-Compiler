@@ -1,38 +1,33 @@
 %{
+#include <iostream>
 #include <cstdlib>
-#include "AST.hpp"
 #include "parser.hpp"
-
+#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
+#define  TOKEN(t) (yylval.token = t)
+extern "C" int yywrap(){}
 %}
-%%
-"="       return(TASIGN);
-"=="      return (TEQUAL);
-"!"       return (TNOT);
-"!="      return (TNEQUAL);
-"<"       return (TLESS);
-"<="      return (TLESSEQ);
-">"       return (TGREAT);
-">="      return (TGREATEQ);
-[a-zA-Z_][a-zA-Z0-9_]* return (TIDENT);
-[1-9][0-9]* return(TINTEGER);
-[0-9].[0-9]* return (TFLOAT);
-"{"       return(TOBRACE);
-"}"       return(TEBRACE);
-"+"       return (TPLUS);
-"-"       return (TMINUS);
-"*"       return (TMULTI);
-"/"       return (TDIVIDE);
-"%"       return (TMODULO);
-"return"  return (TRETURN);
-"int"     return (TINT);
-"float"   return (TFLOAT);
-"double"  return (TDOUBLE);
-"void"    return (TVOID);
-%%
 
-yywrap()
-{
-     return 1;
-}
-
+%%
+[ \t\n]  ;
+"="  return TOKEN(TASSIGN);
+"==" return TOKEN(TEQUAL);
+"!"  return TOKEN(TNOT);
+"!=" return TOKEN(TNEQUAL);
+"<"  return TOKEN(TLESS);
+"<=" return TOKEN(TLESSEQ);
+">"  return TOKEN(TGREAT);
+">=" return TOKEN(TGREATEQ);
+[a-zA-Z_][a-zA-Z0-9_]* SAVE_TOKEN; return TIDENT;
+[1-9][0-9]*            SAVE_TOKEN; return TINTEGER;
+[0-9]+\.[0-9]*         SAVE_TOKEN; return TFLOAT;
+"{"                    return TOKEN(TLBRACE);
+"}"                    return TOKEN(TRBRACE);
+"+"                    return TOKEN(TPLUS);
+"-"                    return TOKEN(TMINUS);
+"*"                    return TOKEN(TMUL);
+"/"                    return TOKEN(TDIVIDE);
+"%"                    return TOKEN(TMODULO);
+";"                    return TOKEN(TSEMI);
+.                      yyterminate();
+%%
 
