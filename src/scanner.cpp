@@ -369,8 +369,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 22
-#define YY_END_OF_BUFFER 23
+#define YY_NUM_RULES 21
+#define YY_END_OF_BUFFER 22
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -378,30 +378,29 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[32] =
+static yyconst flex_int16_t yy_accept[31] =
     {   0,
-        0,    0,   23,   21,    1,    1,    4,   19,   17,   15,
-       16,   18,   21,   11,   20,    6,    2,    8,   10,   13,
-       14,    5,   12,    0,   11,    7,    3,    9,   10,   12,
-        0
+        0,    0,   22,   21,   20,    3,   18,   16,   14,   15,
+       17,   21,   10,   19,    5,    1,    7,    9,   12,   13,
+        4,   11,    0,   10,    6,    2,    8,    9,   11,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    4,    1,    1,    1,    5,    1,    1,    1,
-        1,    6,    7,    1,    8,    9,   10,   11,   12,   12,
-       12,   12,   12,   12,   12,   12,   12,    1,   13,   14,
-       15,   16,    1,    1,   17,   17,   17,   17,   17,   17,
-       17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
-       17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
-        1,    1,    1,    1,   17,    1,   17,   17,   17,   17,
+        1,    1,    3,    1,    1,    1,    4,    1,    1,    1,
+        1,    5,    6,    1,    7,    8,    9,   10,   11,   11,
+       11,   11,   11,   11,   11,   11,   11,    1,   12,   13,
+       14,   15,    1,    1,   16,   16,   16,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+        1,    1,    1,    1,   16,    1,   16,   16,   16,   16,
 
-       17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
-       17,   17,   17,   17,   17,   17,   17,   17,   17,   17,
-       17,   17,   18,    1,   19,    1,    1,    1,    1,    1,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,   16,   16,   16,   16,   16,   16,   16,   16,
+       16,   16,   17,    1,   18,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -418,46 +417,46 @@ static yyconst flex_int32_t yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst flex_int32_t yy_meta[20] =
+static yyconst flex_int32_t yy_meta[19] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    1,
-        3,    3,    1,    1,    1,    1,    4,    1,    1
+        1,    1,    1,    1,    1,    1,    1,    2,    1,    3,
+        3,    1,    1,    1,    1,    4,    1,    1
     } ;
 
-static yyconst flex_int16_t yy_base[35] =
+static yyconst flex_int16_t yy_base[34] =
     {   0,
-        0,    0,   38,   39,   39,   39,   22,   39,   39,   39,
-       39,   39,   27,   26,   39,   19,   18,   17,    0,   39,
-       39,   39,    9,   22,   21,   39,   39,   39,    0,   11,
-       39,   22,   24,   25
+        0,    0,   37,   38,   38,   22,   38,   38,   38,   38,
+       38,   27,   26,   38,   19,   18,   17,    0,   38,   38,
+       38,    9,   22,   21,   38,   38,   38,    0,   11,   38,
+       21,   23,   24
     } ;
 
-static yyconst flex_int16_t yy_def[35] =
+static yyconst flex_int16_t yy_def[34] =
     {   0,
-       31,    1,   31,   31,   31,   31,   31,   31,   31,   31,
-       31,   31,   32,   33,   31,   31,   31,   31,   34,   31,
-       31,   31,   31,   32,   33,   31,   31,   31,   34,   31,
-        0,   31,   31,   31
+       30,    1,   30,   30,   30,   30,   30,   30,   30,   30,
+       30,   31,   32,   30,   30,   30,   30,   33,   30,   30,
+       30,   30,   31,   32,   30,   30,   30,   33,   30,    0,
+       30,   30,   30
     } ;
 
-static yyconst flex_int16_t yy_nxt[59] =
+static yyconst flex_int16_t yy_nxt[57] =
     {   0,
-        4,    5,    6,    7,    8,    9,   10,   11,    4,   12,
-       13,   14,   15,   16,   17,   18,   19,   20,   21,   30,
-       30,   30,   30,   24,   24,   25,   25,   29,   29,   23,
-       23,   28,   27,   26,   23,   23,   22,   31,    3,   31,
-       31,   31,   31,   31,   31,   31,   31,   31,   31,   31,
-       31,   31,   31,   31,   31,   31,   31,   31
+        4,    5,    6,    7,    8,    9,   10,    4,   11,   12,
+       13,   14,   15,   16,   17,   18,   19,   20,   29,   29,
+       29,   29,   23,   23,   24,   24,   28,   28,   22,   22,
+       27,   26,   25,   22,   22,   21,   30,    3,   30,   30,
+       30,   30,   30,   30,   30,   30,   30,   30,   30,   30,
+       30,   30,   30,   30,   30,   30
     } ;
 
-static yyconst flex_int16_t yy_chk[59] =
+static yyconst flex_int16_t yy_chk[57] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,   23,
-       23,   30,   30,   32,   32,   33,   33,   34,   34,   25,
-       24,   18,   17,   16,   14,   13,    7,    3,   31,   31,
-       31,   31,   31,   31,   31,   31,   31,   31,   31,   31,
-       31,   31,   31,   31,   31,   31,   31,   31
+        1,    1,    1,    1,    1,    1,    1,    1,   22,   22,
+       29,   29,   31,   31,   32,   32,   33,   33,   24,   23,
+       17,   16,   15,   13,   12,    6,    3,   30,   30,   30,
+       30,   30,   30,   30,   30,   30,   30,   30,   30,   30,
+       30,   30,   30,   30,   30,   30
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -482,7 +481,7 @@ char *yytext;
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
 #define  TOKEN(t) (yylval.token = t)
 extern "C" int yywrap(){}
-#line 486 "scanner.cpp"
+#line 485 "scanner.cpp"
 
 #define INITIAL 0
 
@@ -671,7 +670,7 @@ YY_DECL
     
 #line 10 "scanner.l"
 
-#line 675 "scanner.cpp"
+#line 674 "scanner.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -724,13 +723,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 32 )
+				if ( yy_current_state >= 31 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 39 );
+		while ( yy_base[yy_current_state] != 38 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -755,117 +754,112 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
-/* rule 1 can match eol */
 YY_RULE_SETUP
 #line 11 "scanner.l"
-;
+return TOKEN(TASSIGN);
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 12 "scanner.l"
-return TOKEN(TASSIGN);
+return TOKEN(TEQUAL);
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 13 "scanner.l"
-return TOKEN(TEQUAL);
+return TOKEN(TNOT);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 14 "scanner.l"
-return TOKEN(TNOT);
+return TOKEN(TNEQUAL);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 15 "scanner.l"
-return TOKEN(TNEQUAL);
+return TOKEN(TLESS);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 16 "scanner.l"
-return TOKEN(TLESS);
+return TOKEN(TLESSEQ);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 17 "scanner.l"
-return TOKEN(TLESSEQ);
+return TOKEN(TGREAT);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 18 "scanner.l"
-return TOKEN(TGREAT);
+return TOKEN(TGREATEQ);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 19 "scanner.l"
-return TOKEN(TGREATEQ);
+SAVE_TOKEN; return TIDENT;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 20 "scanner.l"
-SAVE_TOKEN; return TIDENT;
+SAVE_TOKEN; return TINTEGER;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 21 "scanner.l"
-SAVE_TOKEN; return TINTEGER;
+SAVE_TOKEN; return TFLOAT;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 22 "scanner.l"
-SAVE_TOKEN; return TFLOAT;
+return TOKEN(TLBRACE);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 23 "scanner.l"
-return TOKEN(TLBRACE);
+return TOKEN(TRBRACE);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 24 "scanner.l"
-return TOKEN(TRBRACE);
+return TOKEN(TPLUS);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 25 "scanner.l"
-return TOKEN(TPLUS);
+return TOKEN(TMINUS);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 26 "scanner.l"
-return TOKEN(TMINUS);
+return TOKEN(TMUL);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 27 "scanner.l"
-return TOKEN(TMUL);
+return TOKEN(TDIVIDE);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 28 "scanner.l"
-return TOKEN(TDIVIDE);
+return TOKEN(TMODULO);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 29 "scanner.l"
-return TOKEN(TMODULO);
+return TOKEN(TSEMI);
 	YY_BREAK
 case 20:
+/* rule 20 can match eol */
 YY_RULE_SETUP
 #line 30 "scanner.l"
-return TOKEN(TSEMI);
+;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 31 "scanner.l"
-yyterminate();
-	YY_BREAK
-case 22:
-YY_RULE_SETUP
-#line 32 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 869 "scanner.cpp"
+#line 863 "scanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1157,7 +1151,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 32 )
+			if ( yy_current_state >= 31 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1185,11 +1179,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 32 )
+		if ( yy_current_state >= 31 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 31);
+	yy_is_jam = (yy_current_state == 30);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1863,8 +1857,101 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 32 "scanner.l"
+#line 31 "scanner.l"
 
 
 
+/* A Bison parser, made by GNU Bison 3.0.2.  */
+
+/* Bison interface for Yacc-like parsers in C
+
+   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
+
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
+
+#ifndef YY_YY_PARSER_HPP_INCLUDED
+# define YY_YY_PARSER_HPP_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    TINTEGER = 258,
+    TFLOAT = 259,
+    TIDENT = 260,
+    TLBRACE = 261,
+    TRBRACE = 262,
+    TASSIGN = 263,
+    TEQUAL = 264,
+    TNOT = 265,
+    TNEQUAL = 266,
+    TLESS = 267,
+    TLESSEQ = 268,
+    TGREAT = 269,
+    TGREATEQ = 270,
+    TPLUS = 271,
+    TMINUS = 272,
+    TMULTI = 273,
+    TDIVIDE = 274,
+    TMODULO = 275,
+    TSEMI = 276,
+    TMUL = 277,
+    TDIV = 278
+  };
+#endif
+
+/* Value type.  */
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+typedef union YYSTYPE YYSTYPE;
+union YYSTYPE
+{
+#line 8 "parser.y" /* yacc.c:1909  */
+
+   int token;
+   std::string *string;
+
+#line 83 "parser.hpp" /* yacc.c:1909  */
+};
+# define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
+#endif
+
+
+extern YYSTYPE yylval;
+
+int yyparse (void);
+
+#endif /* !YY_YY_PARSER_HPP_INCLUDED  */
 

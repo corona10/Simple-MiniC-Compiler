@@ -8,7 +8,6 @@ extern "C" int yywrap(){}
 %}
 
 %%
-[ \t\n]  ;
 "="  return TOKEN(TASSIGN);
 "==" return TOKEN(TEQUAL);
 "!"  return TOKEN(TNOT);
@@ -28,6 +27,6 @@ extern "C" int yywrap(){}
 "/"                    return TOKEN(TDIVIDE);
 "%"                    return TOKEN(TMODULO);
 ";"                    return TOKEN(TSEMI);
-.                      yyterminate();
+[\t\n]                   ;
 %%
 

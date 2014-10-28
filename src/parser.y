@@ -18,8 +18,19 @@
 %left TMUL TDIV
 %right TEQUAL
 
+%start program
 
 %%
+
+program : stmts
+        ;
+
+stmts   : stmt
+        | stmts stmt
+        ;
+
+stmt    : var_decl
+        ;
 
 var_decl : ident ident TSEMI { std::cout<<"Variable with out Number"<<std::endl;}
          | ident ident TASSIGN number TSEMI {std::cout<<"Variable with Number!"<<std::endl;}
