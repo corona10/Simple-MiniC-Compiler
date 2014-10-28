@@ -1,0 +1,9 @@
+language: cpp
+
+compiler:
+  -g++
+
+before_script:
+  -cd src
+
+script: make
