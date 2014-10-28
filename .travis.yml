@@ -1,9 +1,9 @@
 language: cpp
 
 compiler:
-  -g++
+  - g++
 
 before_script:
-  -cd src
-
+  - cd src
+  - make clean
 script: make
