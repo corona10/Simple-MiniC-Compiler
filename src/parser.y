@@ -9,11 +9,14 @@
    int token;
    std::string *string;
 }
-%token TINTEGER TFLOAT TIDENT
-%token TLBRACE TRBRACE
+%token TINT_VALUE TFLOAT_VALUE TIDENT
+%token TLBRACE TRBRACE TLSBRACE TRSBRACE
 %token TASSIGN TEQUAL TNOT TNEQUAL TLESS TLESSEQ TGREAT TGREATEQ
 %token TPLUS TMINUS TMULTI TDIVIDE TMODULO
-%token TSEMI
+%token TSEMI TCOMMA
+%token TINT TDOUBLE TFLOAT
+%token TMAIN
+
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -29,17 +32,28 @@ stmts   : stmt
         | stmts stmt
         ;
 
-stmt    : var_decl
+stmt    : var_decl TSEMI
+        | function_call TSEMI
         ;
 
-var_decl : ident ident TSEMI { std::cout<<"Variable with out Number"<<std::endl;}
-         | ident ident TASSIGN number TSEMI {std::cout<<"Variable with Number!"<<std::endl;}
+function_call : ident TLSBRACE arg_list TRSBRACE {std::cout <<"Function call!!"<<std::endl;}
+             ;
+var_decl : type ident { std::cout<<"Variable with out Number"<<std::endl;}
+         | type  ident TASSIGN number {std::cout<<"Variable with Number!"<<std::endl;}
          ;
-
+         
+arg_list : arg_list TCOMMA number
+         | number
+         ;
 ident : TIDENT
       ;
-number: TINTEGER
+
+type  : TINT
+      | TDOUBLE
       | TFLOAT
+      ;
+number: TINT_VALUE
+      | TFLOAT_VALUE
       ;
               
 %%
