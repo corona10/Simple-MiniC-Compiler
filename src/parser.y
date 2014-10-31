@@ -37,6 +37,7 @@ stmt    : var_decl TSEMI
         ;
 
 function_call : ident TLSBRACE arg_list TRSBRACE {std::cout <<"Function call!!"<<std::endl;}
+              | ident TLSBRACE TRSBRACE {std::cout << "Function Call!!" <<std::endl;}
              ;
 var_decl : type ident { std::cout<<"Variable with out Number"<<std::endl;}
          | type  ident TASSIGN number {std::cout<<"Variable with Number!"<<std::endl;}
