@@ -25,7 +25,6 @@
 
 program : definition
         ;
-
 definition  : definition function_def
             | function_def
             ;

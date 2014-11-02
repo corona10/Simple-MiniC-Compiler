@@ -34,7 +34,7 @@ class  CodeGenerator{
        CodeGenerator()
        {
           this._globalContext = getGlobalContext();
-          this._module = new Module("main", this._globalContext);
+          this._module;
           
        }
    

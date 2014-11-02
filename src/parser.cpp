@@ -458,10 +458,10 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    26,    26,    29,    30,    32,    34,    35,    37,    38,
-      40,    41,    44,    45,    46,    48,    49,    53,    54,    57,
-      58,    60,    61,    63,    66,    67,    68,    70,    71,    73,
-      74
+       0,    26,    26,    28,    29,    31,    33,    34,    36,    37,
+      39,    40,    43,    44,    45,    47,    48,    52,    53,    56,
+      57,    59,    60,    62,    65,    66,    67,    69,    70,    72,
+      73
 };
 #endif
 
@@ -1265,37 +1265,37 @@ yyreduce:
   switch (yyn)
     {
         case 5:
-#line 32 "parser.y" /* yacc.c:1646  */
+#line 31 "parser.y" /* yacc.c:1646  */
     { std::cout<<"function def"<<std::endl;}
 #line 1271 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 37 "parser.y" /* yacc.c:1646  */
+#line 36 "parser.y" /* yacc.c:1646  */
     {std::cout<<"block stmts"<<std::endl;}
 #line 1277 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 38 "parser.y" /* yacc.c:1646  */
+#line 37 "parser.y" /* yacc.c:1646  */
     {std::cout<<"block stmts"<<std::endl;}
 #line 1283 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 45 "parser.y" /* yacc.c:1646  */
+#line 44 "parser.y" /* yacc.c:1646  */
     {std::cout<<"Function call!!"<<std::endl;}
 #line 1289 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 53 "parser.y" /* yacc.c:1646  */
+#line 52 "parser.y" /* yacc.c:1646  */
     { std::cout<<"Variable with out Number"<<std::endl;}
 #line 1295 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 54 "parser.y" /* yacc.c:1646  */
+#line 53 "parser.y" /* yacc.c:1646  */
     {std::cout<<"Variable with Number!"<<std::endl;}
 #line 1301 "parser.cpp" /* yacc.c:1646  */
     break;
@@ -1529,5 +1529,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 76 "parser.y" /* yacc.c:1906  */
+#line 75 "parser.y" /* yacc.c:1906  */
 

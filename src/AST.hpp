@@ -71,34 +71,6 @@ class CBlock : public CBaseAST
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };
-
-class CFunctionCall : public CBaseAST
-{
-      public:
-      const CIdentifier& id;
-      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-
-};
-
-class CAssignment : public CBaseAST
-{
-      public:
-      CIdentifier& lhs;
-      CExpression& rhs;
-
-      CAssignment(CIdenrifier& ident, CExpression& express)
-                 : lhs(ident), rhs(express)
-      {
-      }
-
-      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-};
-class CFunctionDeclare : public CBaseAST
-{
-      public:
-      virtual llvm::Value* codeGenertate(CodeGenerator& codegen);
-};
-
 class CIdentifier : public CBaseAST
 {
       public:
