@@ -70,9 +70,8 @@ extern int yydebug;
     TINT = 280,
     TDOUBLE = 281,
     TFLOAT = 282,
-    TMAIN = 283,
-    TMUL = 284,
-    TDIV = 285
+    TMUL = 283,
+    TDIV = 284
   };
 #endif
 
@@ -86,7 +85,7 @@ union YYSTYPE
    int token;
    std::string *string;
 
-#line 90 "parser.hpp" /* yacc.c:1909  */
+#line 89 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

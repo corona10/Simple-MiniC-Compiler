@@ -11,7 +11,6 @@ extern "C" int yywrap(){}
 "int" return TOKEN(TINT);
 "float" return TOKEN(TFLOAT);
 "double" return TOKEN(TDOUBLE);
-"main"   return TOKEN(TMAIN);
 "="  return TOKEN(TASSIGN);
 "==" return TOKEN(TEQUAL);
 "!"  return TOKEN(TNOT);
