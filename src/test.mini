@@ -1,7 +1,7 @@
 int main()
 {
   int a = 3;
-  int b;
+  float b = 3.5;
   test1(1,2,3); 
   test(); 
 }

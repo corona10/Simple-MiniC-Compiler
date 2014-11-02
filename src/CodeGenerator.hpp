@@ -20,7 +20,7 @@ class  CodeBlock
 {
     public:
     llvm::BasicBlock *block;
-    std::map<std::string, llvm::Value*> block_map;
+    std::map<std::string, llvm::Value*> block_map; //used as Value Symbol Table
 };
 
 class  CodeGenerator{

@@ -49,15 +49,17 @@ class CFloat : public CBaseAST
        virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 };
 
-class CIdentifier : public CBaseAST
+class CIdent : public CBaseAST
 {
       public:
+
         std::string ident_name;
-        CIdentifier(const std::string& name)
+        CIdent(const std::string& name)
                    : ident_name(name)
         {
         }
         virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+        
 };
 
 class CBlock : public CBaseAST
@@ -70,17 +72,6 @@ class CBlock : public CBaseAST
       }
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
-};
-class CIdentifier : public CBaseAST
-{
-      public:
-      std::string name;
-      Cidentfier(std::string _val)
-                :name(_val)
-      {
-      } 
-
-      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 };
 
 class CVarDeclareration : public CBaseAST

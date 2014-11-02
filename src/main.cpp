@@ -11,6 +11,7 @@ int main(int argc, char* argv[])
     if(argc != 3)
     {
       std::cout<<"<Error> please Excute SMCC as 'smcc <source file.mini> <ouput_name> "<<std::endl;
+      std::cout<<"        SMCC is written by Dong-hee,Na (corona10@gmail.com)"<<std::endl;
       return -1;
     }else{
 

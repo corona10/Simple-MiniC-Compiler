@@ -14,9 +14,11 @@
 %token TASSIGN TEQUAL TNOT TNEQUAL TLESS TLESSEQ TGREAT TGREATEQ
 %token TPLUS TMINUS TMULTI TDIVIDE TMODULO
 %token TSEMI TCOMMA
-%token TINT TDOUBLE TFLOAT
+%token TINT TDOUBLE TFLOAT TVOID
 
-%type <string> TIDENT ident
+%type <string> TIDENT
+%type <string> number TINT_VALUE TFLOAT_VALUE
+%type <string> type TINT TFLOAT TDOUBLE TVOID
 
 %left TPLUS TMINUS
 %left TMUL TDIV
@@ -33,8 +35,8 @@ definition  : definition function_def
             ;
 function_def : function_def_hd block_stmts { std::cout<<"function def"<<std::endl;}
              ;
-function_def_hd : type ident TLSBRACE arg_list TRSBRACE
-                | type ident TLSBRACE TRSBRACE
+function_def_hd : type TIDENT TLSBRACE arg_list TRSBRACE
+                | type TIDENT TLSBRACE TRSBRACE
                 ; 
 block_stmts : TLBRACE stmts TRBRACE  {std::cout<<"block stmts"<<std::endl;}
             | TLBRACE TRBRACE        {std::cout<<"block stmts"<<std::endl;}
@@ -47,30 +49,27 @@ stmt    : var_decl TSEMI
         | function_call TSEMI {std::cout<<"Function call!!"<<std::endl;}
         | TSEMI
         ;
-function_call : ident TLSBRACE para_list TRSBRACE
-              | ident TLSBRACE TRSBRACE 
+function_call : TIDENT TLSBRACE para_list TRSBRACE
+              | TIDENT TLSBRACE TRSBRACE 
               ;
 
 
-var_decl : type ident  {std::cout<<"Identifier: "<<*$2<<std::endl;}
-         | type  ident TASSIGN number 
+var_decl : type  TIDENT  {std::cout<<"type: "<<*$1<<", val_name: "<<*$2<<std::endl;}
+         | type  TIDENT TASSIGN number  {std::cout<<"type: "<<*$1<<", val_name: "<<*$2<<", value: "<<*$4 <<std::endl;}
          ;
          
 para_list : para_list TCOMMA value
           | value
           ;
-arg_list : arg_list TCOMMA type ident
-         | type ident
+arg_list : arg_list TCOMMA type TIDENT
+         | type TIDENT
          ;
-ident : TIDENT {$$ = $1;}
-      ;
-
 type  : TINT
-      | TDOUBLE
       | TFLOAT
+      | TDOUBLE
       ;
 value : number
-      | ident
+      | TIDENT
       ;
 number : TINT_VALUE
        | TFLOAT_VALUE
