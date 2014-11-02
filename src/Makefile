@@ -1,7 +1,7 @@
 all: smcc
 
 clean:
-	rm parser.cpp parser.hpp SMCC scanner.cpp
+	rm parser.cpp parser.hpp smcc scanner.cpp
 parser.cpp: parser.y
 	bison -d -o $@ $^
 
