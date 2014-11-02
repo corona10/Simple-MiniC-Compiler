@@ -5,18 +5,15 @@
 
 // library list of LLVM
 #include <llvm/IR/Module.h>
+#include <llvm/IR/LLVMContext.h>
 #include <llvm/IR/Instructions.h>
 #include <llvm/IR/Function.h>
 #include <llvm/IR/DerivedTypes.h>
 #include <llvm/IR/Type.h>
-#include <llvm/ExecutionEngine/GenericValue.h>
-#include <llvm/ExecutionEngine/Interpreter.h>
-#include <llvm/ExecutionEngine/JIT.h>
-
 // library list of std
 #include <iostream>
 #include <vector>
-
+#include <stack>
 using namespace llvm;
 
 class  CodeBlock
@@ -30,33 +27,19 @@ class  CodeGenerator{
 
        public:
        
-       std::stack<*CodeBlock> block_stack;
+       //생성자
        CodeGenerator()
-       {
-          this._globalContext = getGlobalContext();
-          this._module;
-          
+       {   
        }
-   
-       llvm::GenericValue runCode();
-       void GenerateCode();
+ 
+       CodeGenerator(std::string& programName)
+       {
+         this->_module = new Module(programName, getGlobalContext()); 
+       }
 
-       BasicBlock* getCurrentBlock()
-       {
-          BasicBlock* blk = this.block_stack.top()->block;
-          return blk;
-       }
-       std::map<std::string, llvm::Value*>& getBlkmap()
-       {
-          return this.block_Stack.top()->block_map;
-       }
        private:
-       llvm::Function* _mainFunc;
        llvm::Module*   _module;
-       llvm::LLVMContext   _globalContext; 
        
-       CodeBlock* popStack();
-       void pushStack(CodeBlock* block); 
 
 };
 

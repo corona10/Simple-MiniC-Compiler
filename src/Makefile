@@ -11,4 +11,4 @@ scanner.cpp: scanner.l parser.hpp
 	flex -o $@ $^
 
 smcc: parser.cpp main.cpp scanner.cpp
-	g++ -o smcc *.cpp
+	g++ -o smcc *.cpp `llvm-config --libs core jit native --cxxflags --ldflags` -lpthread -lffi -ldl -lm -ltinfo

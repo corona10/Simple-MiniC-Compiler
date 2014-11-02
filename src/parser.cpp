@@ -458,10 +458,10 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    26,    26,    28,    29,    31,    33,    34,    36,    37,
-      39,    40,    43,    44,    45,    47,    48,    52,    53,    56,
-      57,    59,    60,    62,    65,    66,    67,    69,    70,    72,
-      73
+       0,    29,    29,    31,    32,    34,    36,    37,    39,    40,
+      42,    43,    46,    47,    48,    50,    51,    55,    56,    59,
+      60,    62,    63,    65,    68,    69,    70,    72,    73,    75,
+      76
 };
 #endif
 
@@ -1265,38 +1265,38 @@ yyreduce:
   switch (yyn)
     {
         case 5:
-#line 31 "parser.y" /* yacc.c:1646  */
+#line 34 "parser.y" /* yacc.c:1646  */
     { std::cout<<"function def"<<std::endl;}
 #line 1271 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 36 "parser.y" /* yacc.c:1646  */
+#line 39 "parser.y" /* yacc.c:1646  */
     {std::cout<<"block stmts"<<std::endl;}
 #line 1277 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 37 "parser.y" /* yacc.c:1646  */
+#line 40 "parser.y" /* yacc.c:1646  */
     {std::cout<<"block stmts"<<std::endl;}
 #line 1283 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 44 "parser.y" /* yacc.c:1646  */
+#line 47 "parser.y" /* yacc.c:1646  */
     {std::cout<<"Function call!!"<<std::endl;}
 #line 1289 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 52 "parser.y" /* yacc.c:1646  */
-    { std::cout<<"Variable with out Number"<<std::endl;}
+#line 55 "parser.y" /* yacc.c:1646  */
+    {std::cout<<"Identifier: "<<*(yyvsp[0].string)<<std::endl;}
 #line 1295 "parser.cpp" /* yacc.c:1646  */
     break;
 
-  case 18:
-#line 53 "parser.y" /* yacc.c:1646  */
-    {std::cout<<"Variable with Number!"<<std::endl;}
+  case 23:
+#line 65 "parser.y" /* yacc.c:1646  */
+    {(yyval.string) = (yyvsp[0].string);}
 #line 1301 "parser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1529,5 +1529,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 75 "parser.y" /* yacc.c:1906  */
+#line 78 "parser.y" /* yacc.c:1906  */
 

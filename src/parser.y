@@ -15,6 +15,9 @@
 %token TPLUS TMINUS TMULTI TDIVIDE TMODULO
 %token TSEMI TCOMMA
 %token TINT TDOUBLE TFLOAT
+
+%type <string> TIDENT ident
+
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -49,8 +52,8 @@ function_call : ident TLSBRACE para_list TRSBRACE
               ;
 
 
-var_decl : type ident { std::cout<<"Variable with out Number"<<std::endl;}
-         | type  ident TASSIGN number {std::cout<<"Variable with Number!"<<std::endl;}
+var_decl : type ident  {std::cout<<"Identifier: "<<*$2<<std::endl;}
+         | type  ident TASSIGN number 
          ;
          
 para_list : para_list TCOMMA value
@@ -59,7 +62,7 @@ para_list : para_list TCOMMA value
 arg_list : arg_list TCOMMA type ident
          | type ident
          ;
-ident : TIDENT
+ident : TIDENT {$$ = $1;}
       ;
 
 type  : TINT
