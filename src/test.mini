@@ -1,7 +1,9 @@
+int x = 5;
 int main()
 {
   int a = 3;
   float b = 3.5;
+  double c = 4.52;
   test1(1,2,3); 
   test(); 
 }

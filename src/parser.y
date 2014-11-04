@@ -1,5 +1,7 @@
 %{
    #include <iostream>
+   #include <string>
+   #include "AST.hpp"
    extern int yylex();
    void yyerror(const char *s){} 
 %}
@@ -32,6 +34,7 @@ program : definition
         ;
 definition  : definition function_def
             | function_def
+            | stmt
             ;
 function_def : function_def_hd block_stmts { std::cout<<"function def"<<std::endl;}
              ;
@@ -71,7 +74,7 @@ type  : TINT
 value : number
       | TIDENT
       ;
-number : TINT_VALUE
+number : TINT_VALUE { new CInt(std::stoi(*$1));}
        | TFLOAT_VALUE
               
 %%

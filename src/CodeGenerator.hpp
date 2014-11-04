@@ -36,9 +36,22 @@ class  CodeGenerator{
        {
          this->_module = new Module(programName, getGlobalContext()); 
        }
+       
+       void GenerateIR();
+
+       llvm::BasicBlock* getCurrentBlock()
+       {
+             return this->_block_stack.top()->block;
+       }
+
+       void pushBasicBlock(CodeBlock* block)
+       {
+             this->_block_stack.push(block);
+       }
 
        private:
        llvm::Module*   _module;
+       std::stack< CodeBlock   *> _block_stack;
        
 
 };

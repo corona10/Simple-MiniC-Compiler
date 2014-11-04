@@ -3,9 +3,11 @@
  @author : Dong-hee,Na
  @date   : 2014-10-12
 **/
-#include <llvm/Value.h>
-#include <stack>
 
+#include "llvm/IR/Constants.h"
+#include <llvm/IR/Value.h>
+#include <stack>
+#include "CodeGenerator.hpp"
 class CBaseAST
 {
       public:
@@ -13,76 +15,17 @@ class CBaseAST
         virtual llvm::Value* codeGenerate(CodeGenerator& codegen) = 0;
 };
 
-typedef CBaseAST CExpression;
-typedef CBaseAST CStatement;
-
-class CInteger : public CBaseAST
+class CInt : public CBaseAST // type 체크해서 적절한 value 생성하는 객체
 {
       public:
-        int value;
-        CInteger(int val)
+        int  value;
+        CInt(int val)
                  : value(val)
         {
         }
-        virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-};
-
-class CDouble : public CBaseAST
-{
-      public:
-       double value;
-       CDouble(double val)
-              : value(val)
-       {
-       }
-       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-};
-
-class CFloat : public CBaseAST
-{
-      public:
-       float value;
-       CFloat(val)
-             :value(val)
-       {
-       }
-       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-};
-
-class CIdent : public CBaseAST
-{
-      public:
-
-        std::string ident_name;
-        CIdent(const std::string& name)
-                   : ident_name(name)
+        ~CInt()
         {
-        }
+        }        
         virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-        
 };
 
-class CBlock : public CBaseAST
-{
-      public:
-      std::vector<CStatement> statement_list;
-
-      CBlock()
-      {
-      }
-      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-
-};
-
-class CVarDeclareration : public CBaseAST
-{
-      public:
-      CIdentifier ident& type;
-      CIdentifier ident& var_id;
-     
-      CVarDeclareration()
-      {
-      }
- 
-      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-}
