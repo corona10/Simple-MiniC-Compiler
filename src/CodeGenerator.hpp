@@ -1,4 +1,3 @@
-#pragma once
 /**
 @author : Dong-hee , Na
 @date   : 2014-10-17
@@ -32,7 +31,8 @@ class  CodeGenerator{
        //생성자 
        CodeGenerator()
        {
-         this->_module = new Module("test", getGlobalContext()); 
+         this->_module = new Module("test", getGlobalContext());
+         this->_module->setTargetTriple("x86_64-pc-linux-gnu"); 
        }
        
        void generateIR();

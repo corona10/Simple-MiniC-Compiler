@@ -1,4 +1,3 @@
-#pragma once
 /**
  Implements of AST with LLVM
  @author : Dong-hee,Na

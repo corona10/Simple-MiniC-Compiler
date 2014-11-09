@@ -29,7 +29,7 @@ llvm::Value* CIdent::codeGenerate(CodeGenerator& codegen)
 llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 {
       Type* p_type = getTypeOf(this->type);
-     // AllocaInst* p_alloc = new AllocaInst(p_type, this.var_name.c_str(), codegen.getCurrentBlock());
+      AllocaInst* p_alloc = new AllocaInst(p_type, this->var_name.c_str(), codegen.getCurrentBlock());
 
  
       return NULL;
