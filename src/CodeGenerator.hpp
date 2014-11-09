@@ -1,3 +1,4 @@
+#pragma once
 /**
 @author : Dong-hee , Na
 @date   : 2014-10-17
@@ -10,6 +11,7 @@
 #include <llvm/IR/Function.h>
 #include <llvm/IR/DerivedTypes.h>
 #include <llvm/IR/Type.h>
+#include <llvm/IR/IRBuilder.h>
 // library list of std
 #include <iostream>
 #include <vector>
@@ -27,17 +29,13 @@ class  CodeGenerator{
 
        public:
        
-       //생성자
+       //생성자 
        CodeGenerator()
-       {   
-       }
- 
-       CodeGenerator(std::string& programName)
        {
-         this->_module = new Module(programName, getGlobalContext()); 
+         this->_module = new Module("test", getGlobalContext()); 
        }
        
-       void GenerateIR();
+       void generateIR();
 
        llvm::BasicBlock* getCurrentBlock()
        {

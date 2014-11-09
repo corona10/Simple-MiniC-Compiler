@@ -19,3 +19,18 @@ llvm::Value* CInt::codeGenerate(CodeGenerator& codegen)
       
      return ConstantInt::get(type, value, true);
 }
+
+llvm::Value* CIdent::codeGenerate(CodeGenerator& codegen)
+{
+
+     return NULL;
+}
+
+llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
+{
+      Type* p_type = getTypeOf(this->type);
+     // AllocaInst* p_alloc = new AllocaInst(p_type, this.var_name.c_str(), codegen.getCurrentBlock());
+
+ 
+      return NULL;
+}

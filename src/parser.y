@@ -36,11 +36,9 @@ definition  : definition function_def
             | function_def
             | stmt
             ;
-function_def : function_def_hd block_stmts { std::cout<<"function def"<<std::endl;}
+function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts { std::cout<<"function def"<<std::endl;}
+             | type TIDENT TLSBRACE TRSBRACE block_stmts { std::cout<<"function with out arg_list.. " <<std::endl;}
              ;
-function_def_hd : type TIDENT TLSBRACE arg_list TRSBRACE
-                | type TIDENT TLSBRACE TRSBRACE
-                ; 
 block_stmts : TLBRACE stmts TRBRACE  {std::cout<<"block stmts"<<std::endl;}
             | TLBRACE TRBRACE        {std::cout<<"block stmts"<<std::endl;}
             ;
@@ -58,7 +56,7 @@ function_call : TIDENT TLSBRACE para_list TRSBRACE
 
 
 var_decl : type  TIDENT  {std::cout<<"type: "<<*$1<<", val_name: "<<*$2<<std::endl;}
-         | type  TIDENT TASSIGN number  {std::cout<<"type: "<<*$1<<", val_name: "<<*$2<<", value: "<<*$4 <<std::endl;}
+         | type  TIDENT TASSIGN number  {std::cout<<"type: "<<*$1<<", val_name: "<<*$2<<", value: "<<*$4 <<std::endl; delete $4;}
          ;
          
 para_list : para_list TCOMMA value
@@ -74,7 +72,8 @@ type  : TINT
 value : number
       | TIDENT
       ;
-number : TINT_VALUE { new CInt(std::stoi(*$1));}
+number : TINT_VALUE 
        | TFLOAT_VALUE
+
               
 %%
