@@ -1,3 +1,4 @@
+#pragma once
 /**
 @author : Dong-hee , Na
 @date   : 2014-10-17
@@ -46,7 +47,7 @@ class  CodeGenerator{
        {
              this->_block_stack.push(block);
        }
-
+       llvm::Module* getModule(){return this->_module;}
        private:
        llvm::Module*   _module;
        std::stack< CodeBlock   *> _block_stack;

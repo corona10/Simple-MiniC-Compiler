@@ -85,8 +85,9 @@ union YYSTYPE
 
    int token;
    std::string *string;
+   CFunctionDefine* func_define;
 
-#line 90 "parser.hpp" /* yacc.c:1909  */
+#line 91 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

@@ -10,6 +10,7 @@
 {
    int token;
    std::string *string;
+   CFunctionDefine* func_define;
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
 %token TLBRACE TRBRACE TLSBRACE TRSBRACE
@@ -21,7 +22,7 @@
 %type <string> TIDENT
 %type <string> number TINT_VALUE TFLOAT_VALUE
 %type <string> type TINT TFLOAT TDOUBLE TVOID
-
+%type <func_define> function_def
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -37,7 +38,7 @@ definition  : definition function_def
             | stmt
             ;
 function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts { std::cout<<"function def"<<std::endl;}
-             | type TIDENT TLSBRACE TRSBRACE block_stmts { std::cout<<"function with out arg_list.. " <<std::endl;}
+             | type TIDENT TLSBRACE TRSBRACE block_stmts { $$ = new CFunctionDefine(*$1, *$2); std::cout<<"function with out arg_list.. " <<std::endl;}
              ;
 block_stmts : TLBRACE stmts TRBRACE  {std::cout<<"block stmts"<<std::endl;}
             | TLBRACE TRBRACE        {std::cout<<"block stmts"<<std::endl;}

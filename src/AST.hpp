@@ -1,3 +1,4 @@
+#pragma once
 /**
  Implements of AST with LLVM
  @author : Dong-hee,Na
@@ -8,11 +9,24 @@
 #include <llvm/IR/Value.h>
 #include <stack>
 #include "CodeGenerator.hpp"
+
+class CBaseAST;
+
 class CBaseAST
 {
       public:
         virtual ~CBaseAST(){}
         virtual llvm::Value* codeGenerate(CodeGenerator& codegen) = 0;
+};
+
+class CRootAST
+{   
+      public:
+       std::vector<CBaseAST*> AST_List;
+       CRootAST(){}
+      
+       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+      
 };
 
 class CInt : public CBaseAST // type 체크해서 적절한 value 생성하는 객체
@@ -58,5 +72,20 @@ class CVarDeclare : public CBaseAST
       {
       }
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+
+};
+
+class CFunctionDefine : public CBaseAST
+{
+     public:
+      std::string type;
+      std::string function_name;
+
+      CFunctionDefine(std::string f_type, std::string f_name)
+                        : type(f_type), function_name(f_name)
+      {
+
+      }
+     virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };

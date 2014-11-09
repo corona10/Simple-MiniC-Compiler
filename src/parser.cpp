@@ -145,8 +145,9 @@ union YYSTYPE
 
    int token;
    std::string *string;
+   CFunctionDefine* func_define;
 
-#line 150 "parser.cpp" /* yacc.c:355  */
+#line 151 "parser.cpp" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -161,7 +162,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 165 "parser.cpp" /* yacc.c:358  */
+#line 166 "parser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -461,9 +462,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    33,    33,    35,    36,    37,    39,    40,    42,    43,
-      45,    46,    49,    50,    51,    53,    54,    58,    59,    62,
-      63,    65,    66,    68,    69,    70,    72,    73,    75,    76
+       0,    34,    34,    36,    37,    38,    40,    41,    43,    44,
+      46,    47,    50,    51,    52,    54,    55,    59,    60,    63,
+      64,    66,    67,    69,    70,    71,    73,    74,    76,    77
 };
 #endif
 
@@ -1271,49 +1272,49 @@ yyreduce:
   switch (yyn)
     {
         case 6:
-#line 39 "parser.y" /* yacc.c:1646  */
+#line 40 "parser.y" /* yacc.c:1646  */
     { std::cout<<"function def"<<std::endl;}
-#line 1277 "parser.cpp" /* yacc.c:1646  */
+#line 1278 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 40 "parser.y" /* yacc.c:1646  */
-    { std::cout<<"function with out arg_list.. " <<std::endl;}
-#line 1283 "parser.cpp" /* yacc.c:1646  */
+#line 41 "parser.y" /* yacc.c:1646  */
+    { (yyval.func_define) = new CFunctionDefine(*(yyvsp[-4].string), *(yyvsp[-3].string)); std::cout<<"function with out arg_list.. " <<std::endl;}
+#line 1284 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 42 "parser.y" /* yacc.c:1646  */
+#line 43 "parser.y" /* yacc.c:1646  */
     {std::cout<<"block stmts"<<std::endl;}
-#line 1289 "parser.cpp" /* yacc.c:1646  */
+#line 1290 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 43 "parser.y" /* yacc.c:1646  */
+#line 44 "parser.y" /* yacc.c:1646  */
     {std::cout<<"block stmts"<<std::endl;}
-#line 1295 "parser.cpp" /* yacc.c:1646  */
+#line 1296 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 50 "parser.y" /* yacc.c:1646  */
+#line 51 "parser.y" /* yacc.c:1646  */
     {std::cout<<"Function call!!"<<std::endl;}
-#line 1301 "parser.cpp" /* yacc.c:1646  */
+#line 1302 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 58 "parser.y" /* yacc.c:1646  */
+#line 59 "parser.y" /* yacc.c:1646  */
     {std::cout<<"type: "<<*(yyvsp[-1].string)<<", val_name: "<<*(yyvsp[0].string)<<std::endl;}
-#line 1307 "parser.cpp" /* yacc.c:1646  */
+#line 1308 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 59 "parser.y" /* yacc.c:1646  */
+#line 60 "parser.y" /* yacc.c:1646  */
     {std::cout<<"type: "<<*(yyvsp[-3].string)<<", val_name: "<<*(yyvsp[-2].string)<<", value: "<<*(yyvsp[0].string) <<std::endl; delete (yyvsp[0].string);}
-#line 1313 "parser.cpp" /* yacc.c:1646  */
+#line 1314 "parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1317 "parser.cpp" /* yacc.c:1646  */
+#line 1318 "parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1541,5 +1542,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 79 "parser.y" /* yacc.c:1906  */
+#line 80 "parser.y" /* yacc.c:1906  */
 

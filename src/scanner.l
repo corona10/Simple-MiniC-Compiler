@@ -1,4 +1,5 @@
 %{
+#include "AST.hpp"
 #include <iostream>
 #include <cstdlib>
 #include "parser.hpp"
