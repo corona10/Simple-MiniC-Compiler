@@ -2,8 +2,11 @@
 #include <iostream>
 #include <string>
 #include "CodeGenerator.hpp"
+#include "AST.hpp"
+#include "parser.hpp"
 extern FILE* yyin;
 extern int yyparse();
+extern CRootAST* pRoot;
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -22,7 +25,7 @@ int main(int argc, char* argv[])
     }
     std::cout<<"IR 코드 생성..."<<std::endl;
     CodeGenerator codegen;
-    codegen.generateIR();
+    codegen.generateIR(*pRoot);
     std::cout<<"IR 코드 생성 완료..."<<std::endl;
     return 0;
 }

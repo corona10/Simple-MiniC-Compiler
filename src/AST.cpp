@@ -1,5 +1,6 @@
 #include "AST.hpp"
-
+#include "CodeGenerator.hpp"
+#include "parser.hpp"
 static Type* getTypeOf(std::string type)
 {
    if(type == "int")
@@ -42,18 +43,21 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
-     llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
-     
+     llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::InternalLinkage, this->function_name, codegen.getModule());
+     std::cout<<"Function Define.. for"<< this->function_name <<std::endl;     
      return p_func;
 }
 
 llvm::Value* CRootAST::codeGenerate(CodeGenerator& codegen)
 {
       auto iter = AST_List.begin();
+      llvm::Value* p_value = nullptr;
       while(iter != AST_List.end())
       {
-          (*iter)->codeGenerate(codegen);
+          p_value = (*iter)->codeGenerate(codegen);
           iter++;
-
+          
       }
+
+     return p_value;
 }

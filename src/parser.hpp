@@ -81,13 +81,14 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 10 "parser.y" /* yacc.c:1909  */
+#line 12 "parser.y" /* yacc.c:1909  */
 
    int token;
    std::string *string;
    CFunctionDefine* func_define;
+   CRootAST* root;
 
-#line 91 "parser.hpp" /* yacc.c:1909  */
+#line 92 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

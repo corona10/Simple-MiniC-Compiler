@@ -16,8 +16,10 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+
 using namespace llvm;
 
+class CRootAST;
 class  CodeBlock
 {
     public:
@@ -36,7 +38,7 @@ class  CodeGenerator{
          this->_module->setTargetTriple("x86_64-pc-linux-gnu"); 
        }
        
-       void generateIR();
+       void generateIR(CRootAST& root);
 
        llvm::BasicBlock* getCurrentBlock()
        {

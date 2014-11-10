@@ -3,7 +3,9 @@
    #include <string>
    #include "AST.hpp"
    extern int yylex();
-   void yyerror(const char *s){} 
+   void yyerror(const char *s){}
+   
+   CRootAST* pRoot; 
 %}
 
 %union
@@ -11,6 +13,7 @@
    int token;
    std::string *string;
    CFunctionDefine* func_define;
+   CRootAST* root;
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
 %token TLBRACE TRBRACE TLSBRACE TRSBRACE
@@ -23,6 +26,7 @@
 %type <string> number TINT_VALUE TFLOAT_VALUE
 %type <string> type TINT TFLOAT TDOUBLE TVOID
 %type <func_define> function_def
+%type <root> definition
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -31,11 +35,11 @@
 
 %%
 
-program : definition
+program : definition { pRoot = $1;}
         ;
-definition  : definition function_def
-            | function_def
-            | stmt
+definition  : definition function_def {$1->AST_List.push_back($2);}
+            | function_def {$$ = new CRootAST(); $$->AST_List.push_back($1);}
+            | stmt {$$ = new CRootAST();}
             ;
 function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts { std::cout<<"function def"<<std::endl;}
              | type TIDENT TLSBRACE TRSBRACE block_stmts { $$ = new CFunctionDefine(*$1, *$2); std::cout<<"function with out arg_list.. " <<std::endl;}
