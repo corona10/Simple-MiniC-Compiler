@@ -7,6 +7,8 @@ parser.cpp: parser.y
 
 parser.hpp: parser.cpp
 
+CodeGenerator.hpp: CodeGenerator.cpp
+
 scanner.cpp: scanner.l parser.hpp
 	flex -o $@ $^
 

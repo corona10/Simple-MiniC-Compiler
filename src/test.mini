@@ -1,4 +1,7 @@
-
+float add()
+{
+}
 int main()
-{ 
+{  
+  int a;  
 }

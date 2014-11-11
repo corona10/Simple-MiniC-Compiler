@@ -43,8 +43,9 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
-     llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::InternalLinkage, this->function_name, codegen.getModule());
-     std::cout<<"Function Define.. for"<< this->function_name <<std::endl;     
+     llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
+     std::cout<<"Function Define.. for "<< this->function_name <<std::endl;
+     llvm::BasicBlock* p_bb = BasicBlock::Create(getGlobalContext(), "entry", p_func, 0);     
      return p_func;
 }
 
