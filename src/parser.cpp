@@ -1327,19 +1327,19 @@ yyreduce:
 
   case 10:
 #line 56 "parser.y" /* yacc.c:1646  */
-    {(yyval.block) = (yyvsp[0].block);}
+    {(yyval.block) = new CBlock("entry"); (yyval.block)->instruction_list.push_back((yyvsp[0].var_declare));}
 #line 1332 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 57 "parser.y" /* yacc.c:1646  */
-    {}
+    {(yyvsp[-1].block)->instruction_list.push_back((yyvsp[0].var_declare));}
 #line 1338 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 60 "parser.y" /* yacc.c:1646  */
-    { (yyval.block) = new CBlock("entry"); (yyval.block)->instruction_list.push_back((yyvsp[-1].var_declare));}
+    { (yyval.var_declare) = (yyvsp[-1].var_declare);}
 #line 1344 "parser.cpp" /* yacc.c:1646  */
     break;
 

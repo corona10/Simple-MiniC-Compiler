@@ -31,8 +31,8 @@
 
 %type <func_define> function_def
 %type <root> definition
-%type <block> stmts block_stmts stmt
-%type <var_declare> var_decl
+%type <block> stmts block_stmts 
+%type <var_declare> var_decl stmt
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -53,11 +53,11 @@ function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts { std::cout<<
 block_stmts : TLBRACE stmts TRBRACE  {$$ = $2;}
             | TLBRACE TRBRACE        {$$ = new CBlock("entry");}
             ;
-stmts   : stmt {$$ = $1;}
-        | stmts stmt {}
+stmts   : stmt {$$ = new CBlock("entry"); $$->instruction_list.push_back($1);}
+        | stmts stmt  {$1->instruction_list.push_back($2);}
         ;
 
-stmt    : var_decl TSEMI { $$ = new CBlock("entry"); $$->instruction_list.push_back($1);}
+stmt    : var_decl TSEMI { $$ = $1;}
         | function_call TSEMI {std::cout<<"Function call!!"<<std::endl;}
         | TSEMI
         ;

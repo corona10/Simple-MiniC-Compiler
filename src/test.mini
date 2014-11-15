@@ -1,6 +1,7 @@
 int add()
 {
   float b;
+  int x;
 }
 int main()
 {
