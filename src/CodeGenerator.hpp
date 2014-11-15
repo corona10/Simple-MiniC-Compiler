@@ -17,15 +17,10 @@
 #include <vector>
 #include <stack>
 
+
 using namespace llvm;
 
 class CRootAST;
-class  CodeBlock
-{
-    public:
-    llvm::BasicBlock *block;
-    std::map<std::string, llvm::Value*> block_map; //used as Value Symbol Table
-};
 
 class  CodeGenerator{
 
@@ -39,20 +34,20 @@ class  CodeGenerator{
        }
        
        void generateIR(CRootAST& root);
+       void pushBlock(llvm::BasicBlock* blk)
+       {
+            block_stack.push(blk);
+       }
 
        llvm::BasicBlock* getCurrentBlock()
        {
-             return this->_block_stack.top()->block;
+            return block_stack.top();
        }
 
-       void pushBasicBlock(CodeBlock* block)
-       {
-             this->_block_stack.push(block);
-       }
        llvm::Module* getModule(){return this->_module;}
        private:
        llvm::Module*   _module;
-       std::stack< CodeBlock   *> _block_stack;
+       std::stack<BasicBlock*> block_stack;
        
 
 };

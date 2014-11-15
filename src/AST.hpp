@@ -11,6 +11,7 @@
 #include "CodeGenerator.hpp"
 
 class CBaseAST;
+class CBlock;
 
 class CBaseAST
 {
@@ -80,12 +81,31 @@ class CFunctionDefine : public CBaseAST
      public:
       std::string type;
       std::string function_name;
+      std::vector<CBlock*> block_list;
 
       CFunctionDefine(std::string f_type, std::string f_name)
                         : type(f_type), function_name(f_name)
       {
-
+          
       }
      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+
+};
+
+class CBlock : public CBaseAST
+{
+      public:
+      std::vector<CBaseAST*> instruction_list;
+      std::string block_name;
+      BasicBlock* basicblock;
+      std::map<std::string, llvm::Value*> symbol_table;
+
+      CBlock(std::string name)
+            : block_name(name)
+      {
+           basicblock = BasicBlock::Create(getGlobalContext(), name); 
+      }
+      BasicBlock* getBasicBlock(){ return this->basicblock;}
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };

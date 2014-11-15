@@ -1,7 +1,10 @@
-float add()
+int add()
 {
+  float b;
 }
 int main()
-{  
-  int a;  
+{
+  int a;
+  float b; 
 }
+

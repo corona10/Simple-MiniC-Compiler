@@ -71,8 +71,9 @@ extern int yydebug;
     TDOUBLE = 281,
     TFLOAT = 282,
     TVOID = 283,
-    TMUL = 284,
-    TDIV = 285
+    TRETURN = 284,
+    TMUL = 285,
+    TDIV = 286
   };
 #endif
 
@@ -87,8 +88,10 @@ union YYSTYPE
    std::string *string;
    CFunctionDefine* func_define;
    CRootAST* root;
+   CBlock*   block;
+   CVarDeclare* var_declare;
 
-#line 92 "parser.hpp" /* yacc.c:1909  */
+#line 95 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

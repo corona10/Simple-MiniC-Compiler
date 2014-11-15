@@ -14,6 +14,7 @@ int  SAVE_TOKEN; return TINT;
 float SAVE_TOKEN; return TFLOAT;
 double SAVE_TOKEN; return TDOUBLE;
 void   SAVE_TOKEN; return TVOID;
+return SAVE_TOKEN; return TRETURN;
 "="  return TOKEN(TASSIGN);
 "==" return TOKEN(TEQUAL);
 "!"  return TOKEN(TNOT);
