@@ -25,9 +25,9 @@
 %token TINT TDOUBLE TFLOAT TVOID
 %token TRETURN
 
-%type <string> TIDENT
+%type <string> TIDENT 
 %type <string> number TINT_VALUE TFLOAT_VALUE
-%type <string> type TINT TFLOAT TDOUBLE TVOID
+%type <string> type TINT TFLOAT TDOUBLE TVOID TRETURN
 
 %type <func_define> function_def
 %type <root> definition
@@ -59,13 +59,16 @@ stmts   : stmt {$$ = new CBlock("entry"); $$->instruction_list.push_back($1);}
 
 stmt    : var_decl TSEMI { $$ = $1;}
         | function_call TSEMI {std::cout<<"Function call!!"<<std::endl;}
-        | TSEMI
+        | return_inst TSEMI {std::cout<<"return instruct.."<<std::endl;}
         ;
 function_call : TIDENT TLSBRACE para_list TRSBRACE
               | TIDENT TLSBRACE TRSBRACE 
               ;
 
-
+return_inst  : TRETURN TINT_VALUE
+             | TRETURN TFLOAT_VALUE
+             | TRETURN TIDENT
+             ;
 var_decl : type  TIDENT  { $$ = new CVarDeclare(*$1, *$2);}
          | type  TIDENT TASSIGN number  {std::cout<<"type: "<<*$1<<", val_name: "<<*$2<<", value: "<<*$4 <<std::endl; delete $4;}
          ;

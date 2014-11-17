@@ -34,10 +34,15 @@ llvm::Value* CIdent::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 {
-      std::cout<<"Code generate for Var decalre "<<std::endl;
+      std::cout<<"Code generate for Var declare "<<std::endl;
       
       Type* p_type = getTypeOf(this->type);
       AllocaInst* p_alloc = new AllocaInst(p_type, this->var_name.c_str(), codegen.getCurrentBlock());
+      if(this->type == "int" || this->type == "float")
+         p_alloc->setAlignment(4);
+      else if(this->type == "double")
+         p_alloc->setAlignment(8);
+      
  
      return p_alloc;
 }
@@ -88,10 +93,9 @@ llvm::Value* CBlock::codeGenerate(CodeGenerator& codegen)
       {
             
             auto iter = this->instruction_list.begin();
-            std::cout<<this->instruction_list.size()<<std::endl;
+            std::cout<<"number of instruction...: "<<this->instruction_list.size()<<std::endl;
             while(iter != this->instruction_list.end())
             {
-                std::cout<<"Has Instruction " <<std::endl;
                 p_value = (*iter)->codeGenerate(codegen);
                 iter++;
             }

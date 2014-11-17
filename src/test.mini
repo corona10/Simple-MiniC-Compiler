@@ -5,7 +5,9 @@ int add()
 }
 int main()
 {
+  
   int a;
   float b; 
+  double f;
 }
 
