@@ -6,6 +6,7 @@
 **/
 
 #include "llvm/IR/Constants.h"
+#include "llvm/IR/Instruction.h"
 #include <llvm/IR/Value.h>
 #include <stack>
 #include "CodeGenerator.hpp"
@@ -107,5 +108,19 @@ class CBlock : public CBaseAST
       }
       BasicBlock* getBasicBlock(){ return this->basicblock;}
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+
+};
+
+class CReturn : public CBaseAST
+{
+   public:
+   int  RT;
+   std::string value;
+
+   CReturn(int rt, std::string val)
+          :RT(rt), value(val)
+   {
+   }
+   virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };

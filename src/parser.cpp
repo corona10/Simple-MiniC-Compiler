@@ -152,8 +152,10 @@ union YYSTYPE
    CRootAST* root;
    CBlock*   block;
    CVarDeclare* var_declare;
+   CReturn* return_inst;
+   CBaseAST* base;
 
-#line 157 "parser.cpp" /* yacc.c:355  */
+#line 159 "parser.cpp" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -168,7 +170,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 172 "parser.cpp" /* yacc.c:358  */
+#line 174 "parser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -468,10 +470,10 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    44,    44,    46,    47,    48,    50,    51,    53,    54,
-      56,    57,    60,    61,    62,    64,    65,    68,    69,    70,
-      72,    73,    76,    77,    79,    80,    82,    83,    84,    86,
-      87,    89,    90
+       0,    47,    47,    49,    50,    51,    53,    54,    56,    57,
+      59,    60,    63,    64,    65,    67,    68,    71,    72,    73,
+      75,    76,    79,    80,    82,    83,    85,    86,    87,    89,
+      90,    92,    93
 };
 #endif
 
@@ -1281,97 +1283,103 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 44 "parser.y" /* yacc.c:1646  */
+#line 47 "parser.y" /* yacc.c:1646  */
     { pRoot = (yyvsp[0].root);}
-#line 1287 "parser.cpp" /* yacc.c:1646  */
+#line 1289 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 46 "parser.y" /* yacc.c:1646  */
+#line 49 "parser.y" /* yacc.c:1646  */
     {(yyvsp[-1].root)->AST_List.push_back((yyvsp[0].func_define));}
-#line 1293 "parser.cpp" /* yacc.c:1646  */
+#line 1295 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 47 "parser.y" /* yacc.c:1646  */
+#line 50 "parser.y" /* yacc.c:1646  */
     {(yyval.root) = new CRootAST(); (yyval.root)->AST_List.push_back((yyvsp[0].func_define));}
-#line 1299 "parser.cpp" /* yacc.c:1646  */
+#line 1301 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 48 "parser.y" /* yacc.c:1646  */
+#line 51 "parser.y" /* yacc.c:1646  */
     {(yyval.root) = new CRootAST();}
-#line 1305 "parser.cpp" /* yacc.c:1646  */
+#line 1307 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 50 "parser.y" /* yacc.c:1646  */
+#line 53 "parser.y" /* yacc.c:1646  */
     { std::cout<<"function def"<<std::endl;}
-#line 1311 "parser.cpp" /* yacc.c:1646  */
+#line 1313 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 51 "parser.y" /* yacc.c:1646  */
+#line 54 "parser.y" /* yacc.c:1646  */
     { (yyval.func_define) = new CFunctionDefine(*(yyvsp[-4].string), *(yyvsp[-3].string)); (yyval.func_define)->block_list.push_back((yyvsp[0].block));  std::cout<<"function with out arg_list.. " <<std::endl;}
-#line 1317 "parser.cpp" /* yacc.c:1646  */
+#line 1319 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 53 "parser.y" /* yacc.c:1646  */
+#line 56 "parser.y" /* yacc.c:1646  */
     {(yyval.block) = (yyvsp[-1].block);}
-#line 1323 "parser.cpp" /* yacc.c:1646  */
+#line 1325 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 54 "parser.y" /* yacc.c:1646  */
+#line 57 "parser.y" /* yacc.c:1646  */
     {(yyval.block) = new CBlock("entry");}
-#line 1329 "parser.cpp" /* yacc.c:1646  */
+#line 1331 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 56 "parser.y" /* yacc.c:1646  */
-    {(yyval.block) = new CBlock("entry"); (yyval.block)->instruction_list.push_back((yyvsp[0].var_declare));}
-#line 1335 "parser.cpp" /* yacc.c:1646  */
+#line 59 "parser.y" /* yacc.c:1646  */
+    {(yyval.block) = new CBlock("entry"); (yyval.block)->instruction_list.push_back((yyvsp[0].base));}
+#line 1337 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 57 "parser.y" /* yacc.c:1646  */
-    {(yyvsp[-1].block)->instruction_list.push_back((yyvsp[0].var_declare));}
-#line 1341 "parser.cpp" /* yacc.c:1646  */
+#line 60 "parser.y" /* yacc.c:1646  */
+    {(yyvsp[-1].block)->instruction_list.push_back((yyvsp[0].base));}
+#line 1343 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 60 "parser.y" /* yacc.c:1646  */
-    { (yyval.var_declare) = (yyvsp[-1].var_declare);}
-#line 1347 "parser.cpp" /* yacc.c:1646  */
+#line 63 "parser.y" /* yacc.c:1646  */
+    { (yyval.base) = (yyvsp[-1].var_declare);}
+#line 1349 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 61 "parser.y" /* yacc.c:1646  */
+#line 64 "parser.y" /* yacc.c:1646  */
     {std::cout<<"Function call!!"<<std::endl;}
-#line 1353 "parser.cpp" /* yacc.c:1646  */
+#line 1355 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 62 "parser.y" /* yacc.c:1646  */
-    {std::cout<<"return instruct.."<<std::endl;}
-#line 1359 "parser.cpp" /* yacc.c:1646  */
+#line 65 "parser.y" /* yacc.c:1646  */
+    {(yyval.base) = (yyvsp[-1].return_inst);}
+#line 1361 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 17:
+#line 71 "parser.y" /* yacc.c:1646  */
+    {(yyval.return_inst) = new CReturn(0, *(yyvsp[0].string));}
+#line 1367 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 72 "parser.y" /* yacc.c:1646  */
+#line 75 "parser.y" /* yacc.c:1646  */
     { (yyval.var_declare) = new CVarDeclare(*(yyvsp[-1].string), *(yyvsp[0].string));}
-#line 1365 "parser.cpp" /* yacc.c:1646  */
+#line 1373 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 73 "parser.y" /* yacc.c:1646  */
+#line 76 "parser.y" /* yacc.c:1646  */
     {std::cout<<"type: "<<*(yyvsp[-3].string)<<", val_name: "<<*(yyvsp[-2].string)<<", value: "<<*(yyvsp[0].string) <<std::endl; delete (yyvsp[0].string);}
-#line 1371 "parser.cpp" /* yacc.c:1646  */
+#line 1379 "parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1375 "parser.cpp" /* yacc.c:1646  */
+#line 1383 "parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1599,5 +1607,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 93 "parser.y" /* yacc.c:1906  */
+#line 96 "parser.y" /* yacc.c:1906  */
 

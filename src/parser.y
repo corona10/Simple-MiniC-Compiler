@@ -16,6 +16,8 @@
    CRootAST* root;
    CBlock*   block;
    CVarDeclare* var_declare;
+   CReturn* return_inst;
+   CBaseAST* base;
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
 %token TLBRACE TRBRACE TLSBRACE TRSBRACE
@@ -28,11 +30,12 @@
 %type <string> TIDENT 
 %type <string> number TINT_VALUE TFLOAT_VALUE
 %type <string> type TINT TFLOAT TDOUBLE TVOID TRETURN
-
 %type <func_define> function_def
 %type <root> definition
-%type <block> stmts block_stmts 
-%type <var_declare> var_decl stmt
+%type <base> stmt
+%type <block> stmts block_stmts  
+%type <var_declare> var_decl
+%type <return_inst> return_inst
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -59,13 +62,13 @@ stmts   : stmt {$$ = new CBlock("entry"); $$->instruction_list.push_back($1);}
 
 stmt    : var_decl TSEMI { $$ = $1;}
         | function_call TSEMI {std::cout<<"Function call!!"<<std::endl;}
-        | return_inst TSEMI {std::cout<<"return instruct.."<<std::endl;}
+        | return_inst TSEMI {$$ = $1;}
         ;
 function_call : TIDENT TLSBRACE para_list TRSBRACE
               | TIDENT TLSBRACE TRSBRACE 
               ;
 
-return_inst  : TRETURN TINT_VALUE
+return_inst  : TRETURN TINT_VALUE {$$ = new CReturn(0, *$2);}
              | TRETURN TFLOAT_VALUE
              | TRETURN TIDENT
              ;

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "CodeGenerator.hpp"
 #include "AST.hpp"
 #include "parser.hpp"

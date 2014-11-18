@@ -103,3 +103,10 @@ llvm::Value* CBlock::codeGenerate(CodeGenerator& codegen)
       
       return p_value;
 }
+
+llvm::Value* CReturn::codeGenerate(CodeGenerator& codegen)
+{
+   Type* type = getTypeOf("int");
+   Value* p_val = ConstantInt::get(type, stoi(value), true);
+   return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
+}

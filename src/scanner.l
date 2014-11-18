@@ -24,7 +24,7 @@ return SAVE_TOKEN; return TRETURN;
 ">"  return TOKEN(TGREAT);
 ">=" return TOKEN(TGREATEQ);
 [a-zA-Z_][a-zA-Z0-9_]* SAVE_TOKEN; return TIDENT;
-[1-9][0-9]*            SAVE_TOKEN; return TINT_VALUE;
+[0-9][0-9]*            SAVE_TOKEN; return TINT_VALUE;
 [0-9]+\.[0-9]*         SAVE_TOKEN; return TFLOAT_VALUE;
 "{"                    return TOKEN(TLBRACE);
 "}"                    return TOKEN(TRBRACE);
