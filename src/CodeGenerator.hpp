@@ -21,7 +21,7 @@
 using namespace llvm;
 
 class CRootAST;
-
+class CFunctionDefine;
 class  CodeGenerator{
 
        public:
@@ -47,7 +47,9 @@ class  CodeGenerator{
        llvm::Module* getModule(){return this->_module;}
        private:
        llvm::Module*   _module;
+
        std::stack<BasicBlock*> block_stack;
+       std::stack<CFunctionDefine*> function_stack;  
        
 
 };
