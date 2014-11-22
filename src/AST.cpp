@@ -52,7 +52,7 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
      std::cout<<"Function Define.. for "<< this->function_name <<std::endl;
-   
+     codegen.pushFunction(p_func); 
      if(this->block_list.size() > 0)
      {
         std::cout<<"add block for entry of "<<function_name<<std::endl;
@@ -106,7 +106,11 @@ llvm::Value* CBlock::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CReturn::codeGenerate(CodeGenerator& codegen)
 {
-   Type* type = getTypeOf("int");
-   Value* p_val = ConstantInt::get(type, stoi(value), true);
+   Type* type = codegen.getCurrentFunction()->getReturnType();
+   Value* p_val = nullptr;
+   if(type->isIntegerTy())
+      p_val = ConstantInt::get(type, stoi(value), true);
+   else if(type->isFloatTy() || type->isDoubleTy())
+      p_val = ConstantFP::get(type, stod(value));
    return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
 }

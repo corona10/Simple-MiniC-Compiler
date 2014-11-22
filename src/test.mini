@@ -1,7 +1,12 @@
-int add()
+float  add_f()
+{
+   return 0.2;
+}
+double add_d()
 {
   float b;
   int x;
+  return 1.2;
 }
 int main()
 {

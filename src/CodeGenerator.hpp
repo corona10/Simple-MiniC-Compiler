@@ -21,7 +21,6 @@
 using namespace llvm;
 
 class CRootAST;
-class CFunctionDefine;
 class  CodeGenerator{
 
        public:
@@ -36,20 +35,31 @@ class  CodeGenerator{
        void generateIR(CRootAST& root);
        void pushBlock(llvm::BasicBlock* blk)
        {
+            std::cout<<"Push Block..."<<std::endl;
             block_stack.push(blk);
        }
-
+       void pushFunction(llvm::Function* func)
+       {
+             std::cout<<"Function Stack Size: "<<function_stack.size()<<std::endl;
+             function_stack.push(func);
+       }
        llvm::BasicBlock* getCurrentBlock()
        {
             return block_stack.top();
        }
-
+       llvm::Function* getCurrentFunction()
+       {
+             std::cout<<"pop function_stack.."<<std::endl;
+             Function* p_func = function_stack.top();
+             function_stack.pop();
+             return p_func;
+       }
        llvm::Module* getModule(){return this->_module;}
        private:
        llvm::Module*   _module;
 
        std::stack<BasicBlock*> block_stack;
-       std::stack<CFunctionDefine*> function_stack;  
+       std::stack<Function*> function_stack;  
        
 
 };

@@ -1366,20 +1366,32 @@ yyreduce:
 #line 1367 "parser.cpp" /* yacc.c:1646  */
     break;
 
+  case 18:
+#line 72 "parser.y" /* yacc.c:1646  */
+    {(yyval.return_inst) = new CReturn(1, *(yyvsp[0].string));}
+#line 1373 "parser.cpp" /* yacc.c:1646  */
+    break;
+
+  case 19:
+#line 73 "parser.y" /* yacc.c:1646  */
+    {(yyval.return_inst) = new CReturn(2, *(yyvsp[0].string));}
+#line 1379 "parser.cpp" /* yacc.c:1646  */
+    break;
+
   case 20:
 #line 75 "parser.y" /* yacc.c:1646  */
     { (yyval.var_declare) = new CVarDeclare(*(yyvsp[-1].string), *(yyvsp[0].string));}
-#line 1373 "parser.cpp" /* yacc.c:1646  */
+#line 1385 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 76 "parser.y" /* yacc.c:1646  */
     {std::cout<<"type: "<<*(yyvsp[-3].string)<<", val_name: "<<*(yyvsp[-2].string)<<", value: "<<*(yyvsp[0].string) <<std::endl; delete (yyvsp[0].string);}
-#line 1379 "parser.cpp" /* yacc.c:1646  */
+#line 1391 "parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1383 "parser.cpp" /* yacc.c:1646  */
+#line 1395 "parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
