@@ -83,7 +83,8 @@ class CFunctionDefine : public CBaseAST
       std::string type;
       std::string function_name;
       std::vector<CBlock*> block_list;
-
+      
+      std::map<Value*, std::string> function_table;
       CFunctionDefine(std::string f_type, std::string f_name)
                         : type(f_type), function_name(f_name)
       {

@@ -51,7 +51,7 @@ definition  : definition function_def {$1->AST_List.push_back($2);}
             | stmt {$$ = new CRootAST();}
             ;
 function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts { std::cout<<"function def"<<std::endl;}
-             | type TIDENT TLSBRACE TRSBRACE block_stmts { $$ = new CFunctionDefine(*$1, *$2); $$->block_list.push_back($5);  std::cout<<"function with out arg_list.. " <<std::endl;}
+             | type TIDENT TLSBRACE TRSBRACE block_stmts { $$ = new CFunctionDefine(*$1, *$2); $$->block_list.push_back($5); }
              ;
 block_stmts : TLBRACE stmts TRBRACE  {$$ = $2;}
             | TLBRACE TRBRACE        {$$ = new CBlock("entry");}
@@ -73,7 +73,7 @@ return_inst  : TRETURN TINT_VALUE {$$ = new CReturn(0, *$2);}
              | TRETURN TIDENT {$$ = new CReturn(2, *$2);}
              ;
 var_decl : type  TIDENT  { $$ = new CVarDeclare(*$1, *$2);}
-         | type  TIDENT TASSIGN number  {std::cout<<"type: "<<*$1<<", val_name: "<<*$2<<", value: "<<*$4 <<std::endl; delete $4;}
+         | type  TIDENT TASSIGN number  {$$ = new CVarDeclare(*$1, *$2, *$4);}
          ;
          
 para_list : para_list TCOMMA value

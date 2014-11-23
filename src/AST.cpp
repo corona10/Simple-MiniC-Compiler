@@ -12,7 +12,7 @@ static Type* getTypeOf(std::string type)
    else if  (type == "void")
       return Type::getVoidTy(getGlobalContext());
 
-   return NULL;  
+   return nullptr;  
 }
 
 static llvm::FunctionType* getFuncTypeOf(std::string f_type)
@@ -29,21 +29,34 @@ llvm::Value* CInt::codeGenerate(CodeGenerator& codegen)
 llvm::Value* CIdent::codeGenerate(CodeGenerator& codegen)
 {
 
-     return NULL;
+     return nullptr;
 }
 
 llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 {
-      std::cout<<"Code generate for Var declare "<<std::endl;
+      //std::cout<<"* add instruction for variable declaration..  "<<std::endl;
       
       Type* p_type = getTypeOf(this->type);
       AllocaInst* p_alloc = new AllocaInst(p_type, this->var_name.c_str(), codegen.getCurrentBlock());
-      if(this->type == "int" || this->type == "float")
+
+      Value* varValue = nullptr;
+
+      if(this->type == "int")
+      {
          p_alloc->setAlignment(4);
+         varValue = ConstantInt::get(p_type, stoi(value), true);
+      }else if(this->type == "float")
+      {
+         p_alloc->setAlignment(4);
+         varValue = ConstantFP::get(p_type, stod(value));
+      }
       else if(this->type == "double")
+      {
          p_alloc->setAlignment(8);
-      
- 
+         varValue = ConstantFP::get(p_type, stod(value));
+      }
+      StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());      
+       
      return p_alloc;
 }
 
@@ -51,16 +64,13 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
-     std::cout<<"Function Define.. for "<< this->function_name <<std::endl;
+     std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;
      codegen.pushFunction(p_func); 
      if(this->block_list.size() > 0)
      {
-        std::cout<<"add block for entry of "<<function_name<<std::endl;
-        
         auto iter = this->block_list.begin();
         while(iter != this->block_list.end())
         {
-             std::cout<<"block insert.."<<std::endl; 
              p_func->getBasicBlockList().push_back((*iter)->getBasicBlock()); 
              (*iter)->codeGenerate(codegen); 
              iter++;           
@@ -76,7 +86,7 @@ llvm::Value* CRootAST::codeGenerate(CodeGenerator& codegen)
       llvm::Value* p_value = nullptr;
       while(iter != AST_List.end())
       {
-          std::cout<<"generate code.."<<std::endl;
+          std::cout<<"- generating code.."<<std::endl;
           p_value = (*iter)->codeGenerate(codegen);
           iter++;
           
@@ -93,7 +103,6 @@ llvm::Value* CBlock::codeGenerate(CodeGenerator& codegen)
       {
             
             auto iter = this->instruction_list.begin();
-            std::cout<<"number of instruction...: "<<this->instruction_list.size()<<std::endl;
             while(iter != this->instruction_list.end())
             {
                 p_value = (*iter)->codeGenerate(codegen);
@@ -112,5 +121,6 @@ llvm::Value* CReturn::codeGenerate(CodeGenerator& codegen)
       p_val = ConstantInt::get(type, stoi(value), true);
    else if(type->isFloatTy() || type->isDoubleTy())
       p_val = ConstantFP::get(type, stod(value));
+
    return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
 }

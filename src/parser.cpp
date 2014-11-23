@@ -1314,7 +1314,7 @@ yyreduce:
 
   case 7:
 #line 54 "parser.y" /* yacc.c:1646  */
-    { (yyval.func_define) = new CFunctionDefine(*(yyvsp[-4].string), *(yyvsp[-3].string)); (yyval.func_define)->block_list.push_back((yyvsp[0].block));  std::cout<<"function with out arg_list.. " <<std::endl;}
+    { (yyval.func_define) = new CFunctionDefine(*(yyvsp[-4].string), *(yyvsp[-3].string)); (yyval.func_define)->block_list.push_back((yyvsp[0].block)); }
 #line 1319 "parser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1386,7 +1386,7 @@ yyreduce:
 
   case 21:
 #line 76 "parser.y" /* yacc.c:1646  */
-    {std::cout<<"type: "<<*(yyvsp[-3].string)<<", val_name: "<<*(yyvsp[-2].string)<<", value: "<<*(yyvsp[0].string) <<std::endl; delete (yyvsp[0].string);}
+    {(yyval.var_declare) = new CVarDeclare(*(yyvsp[-3].string), *(yyvsp[-2].string), *(yyvsp[0].string));}
 #line 1391 "parser.cpp" /* yacc.c:1646  */
     break;
 

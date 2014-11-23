@@ -31,16 +31,14 @@ class  CodeGenerator{
          this->_module = new Module("test", getGlobalContext());
          this->_module->setTargetTriple("x86_64-pc-linux-gnu"); 
        }
-       
+      
        void generateIR(CRootAST& root);
        void pushBlock(llvm::BasicBlock* blk)
        {
-            std::cout<<"Push Block..."<<std::endl;
             block_stack.push(blk);
        }
        void pushFunction(llvm::Function* func)
        {
-             std::cout<<"Function Stack Size: "<<function_stack.size()<<std::endl;
              function_stack.push(func);
        }
        llvm::BasicBlock* getCurrentBlock()
@@ -49,19 +47,17 @@ class  CodeGenerator{
        }
        llvm::Function* getCurrentFunction()
        {
-             std::cout<<"pop function_stack.."<<std::endl;
              Function* p_func = function_stack.top();
              function_stack.pop();
              return p_func;
        }
        llvm::Module* getModule(){return this->_module;}
        private:
-       llvm::Module*   _module;
 
+       llvm::Module*   _module;
        std::stack<BasicBlock*> block_stack;
        std::stack<Function*> function_stack;  
        
-
 };
 
 

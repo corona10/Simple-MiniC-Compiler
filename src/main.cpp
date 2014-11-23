@@ -22,12 +22,12 @@ int main(int argc, char* argv[])
 
     yyin = fopen(argv[1], "r");
     yyparse();
-    std::cout<<"구문분석 완료"<<std::endl;
+    std::cout<<"\n<info> Syntatic parsing completed.."<<std::endl;
     fclose(yyin);
     }
-    std::cout<<"IR 코드 생성..."<<std::endl;
+    std::cout<<"<info> Generating LLVM IR Code..."<<std::endl;
     CodeGenerator codegen;
     codegen.generateIR(*pRoot);
-    std::cout<<"IR 코드 생성 완료..."<<std::endl;
+    std::cout<<"<info> Generating LLVM IR Code completed..."<<std::endl;
     return 0;
 }

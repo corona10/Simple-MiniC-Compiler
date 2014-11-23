@@ -1,19 +1,10 @@
-float  add_f()
-{
-   return 0.2;
-}
-double add_d()
-{
-  float b;
-  int x;
-  return 1.2;
-}
+
 int main()
 {
-  
-  int a;
-  float b; 
-  double f;
+  int nothing;
+  int a= 5;
+  float b = 3.4; 
+  double f = 0.825;
   return 0;
 }
 
