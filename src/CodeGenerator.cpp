@@ -7,18 +7,18 @@
 void CodeGenerator::generateIR(CRootAST& root)
 {
    llvm::LLVMContext & context = llvm::getGlobalContext();
-   llvm::IRBuilder<> builder(context);
+   
    root.codeGenerate(*this);
+   llvm::IRBuilder<> builder(context);;
    std::vector<llvm::Type*> putsArgs;
    putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
    llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
 
-   llvm::FunctionType *putsType =
-   llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
+   llvm::FunctionType *putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
    llvm::Constant *putsFunc = this->_module->getOrInsertFunction("puts", putsType);
    
    std::string ErrorInfo;
-   OwningPtr<tool_output_file> Out(new tool_output_file("./test.bc", ErrorInfo, sys::fs::F_None));
+   OwningPtr<tool_output_file> Out(new tool_output_file("./result/test.bc", ErrorInfo, sys::fs::F_None));
 
    WriteBitcodeToFile(this->_module, Out->os());
    Out->keep(); 
