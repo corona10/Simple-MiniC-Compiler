@@ -84,7 +84,7 @@ class CFunctionDefine : public CBaseAST
       std::string function_name;
       std::vector<CBlock*> block_list;
       
-      std::map<Value*, std::string> function_table;
+      std::map<std::string, Value*> function_symbol_table;
       CFunctionDefine(std::string f_type, std::string f_name)
                         : type(f_type), function_name(f_name)
       {
@@ -115,11 +115,11 @@ class CBlock : public CBaseAST
 class CReturn : public CBaseAST
 {
    public:
-   int  RT;
+   int  mode;
    std::string value;
 
-   CReturn(int rt, std::string val)
-          :RT(rt), value(val)
+   CReturn(int md, std::string val)
+          :mode(md), value(val)
    {
    }
    virtual llvm::Value* codeGenerate(CodeGenerator& codegen);

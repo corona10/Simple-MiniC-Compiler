@@ -69,8 +69,8 @@ function_call : TIDENT TLSBRACE para_list TRSBRACE
               ;
 
 return_inst  : TRETURN TINT_VALUE {$$ = new CReturn(0, *$2);}
-             | TRETURN TFLOAT_VALUE {$$ = new CReturn(1, *$2);}
-             | TRETURN TIDENT {$$ = new CReturn(2, *$2);}
+             | TRETURN TFLOAT_VALUE {$$ = new CReturn(0, *$2);}
+             | TRETURN TIDENT {$$ = new CReturn(1, *$2);}
              ;
 var_decl : type  TIDENT  { $$ = new CVarDeclare(*$1, *$2);}
          | type  TIDENT TASSIGN number  {$$ = new CVarDeclare(*$1, *$2, *$4);}

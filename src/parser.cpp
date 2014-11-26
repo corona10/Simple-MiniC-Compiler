@@ -1368,13 +1368,13 @@ yyreduce:
 
   case 18:
 #line 72 "parser.y" /* yacc.c:1646  */
-    {(yyval.return_inst) = new CReturn(1, *(yyvsp[0].string));}
+    {(yyval.return_inst) = new CReturn(0, *(yyvsp[0].string));}
 #line 1373 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 73 "parser.y" /* yacc.c:1646  */
-    {(yyval.return_inst) = new CReturn(2, *(yyvsp[0].string));}
+    {(yyval.return_inst) = new CReturn(1, *(yyvsp[0].string));}
 #line 1379 "parser.cpp" /* yacc.c:1646  */
     break;
 

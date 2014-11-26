@@ -55,8 +55,7 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
          p_alloc->setAlignment(8);
          varValue = ConstantFP::get(p_type, stod(value));
       }
-      StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());      
-       
+      StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());             
      return p_alloc;
 }
 

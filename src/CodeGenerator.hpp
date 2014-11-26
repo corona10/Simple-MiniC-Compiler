@@ -16,6 +16,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <map>
 
 
 using namespace llvm;
@@ -37,27 +38,41 @@ class  CodeGenerator{
        {
             block_stack.push(blk);
        }
+
        void pushFunction(llvm::Function* func)
        {
              function_stack.push(func);
        }
+
+       void insertSymbol(std::string key, Value* val)
+       {
+             this->GLsymbol_table[key] = val;
+       }
+       
        llvm::BasicBlock* getCurrentBlock()
        {
             return block_stack.top();
        }
+
        llvm::Function* getCurrentFunction()
        {
              Function* p_func = function_stack.top();
              function_stack.pop();
              return p_func;
        }
+       
+       llvm::Value* getSymbolValue(std::string key)
+       {
+
+       } 
        llvm::Module* getModule(){return this->_module;}
        private:
 
        llvm::Module*   _module;
        std::stack<BasicBlock*> block_stack;
-       std::stack<Function*> function_stack;  
-       
+       std::stack<Function*> function_stack;
+       std::map<std::string, llvm::Value*> GLsymbol_table;  
+       //std::stack<CFunctionDefine*> function_stack;
 };
 
 
