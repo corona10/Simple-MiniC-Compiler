@@ -61,7 +61,7 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
          StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());
          p_store->setAlignment(align_size);
       std::cout<<"Insert Value: "<<value<<std::endl;
-      codegen.insertSymbol(var_name, p_alloc);             
+      codegen.insertSymbol(var_name, varValue);             
      return p_alloc;
 }
 
@@ -134,6 +134,7 @@ llvm::Value* CReturn::codeGenerate(CodeGenerator& codegen)
    {
      std::cout<<"find for ident: "<<value<<std::endl;
      p_val = codegen.getSymbolValue(value);
+     //llvm::LoadInst* p_load = new llvm::LoadInst(p_val, "", false, codegen.getCurrentBlock());
      return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
    }
 

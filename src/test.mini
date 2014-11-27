@@ -1,10 +1,9 @@
 
 int main()
 {
-  int nothing;
+  
   int a= 5;
-  float b = 3.4; 
-  double f = 0.825;
+  int b = 1;
   return a;
 }
 
