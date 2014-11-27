@@ -63,7 +63,7 @@ class  CodeGenerator{
        
        llvm::Value* getSymbolValue(std::string key)
        {
-
+             return this->GLsymbol_table[key];
        } 
        llvm::Module* getModule(){return this->_module;}
        private:

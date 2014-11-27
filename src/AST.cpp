@@ -40,22 +40,28 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
       AllocaInst* p_alloc = new AllocaInst(p_type, this->var_name.c_str(), codegen.getCurrentBlock());
 
       Value* varValue = nullptr;
-
+      int align_size = 0;
       if(this->type == "int")
       {
-         p_alloc->setAlignment(4);
+         align_size = 4;
+         p_alloc->setAlignment(align_size);
          varValue = ConstantInt::get(p_type, stoi(value), true);
       }else if(this->type == "float")
       {
-         p_alloc->setAlignment(4);
+         align_size = 4;
+         p_alloc->setAlignment(align_size);
          varValue = ConstantFP::get(p_type, stod(value));
       }
       else if(this->type == "double")
       {
-         p_alloc->setAlignment(8);
+         align_size = 8;
+         p_alloc->setAlignment(align_size);
          varValue = ConstantFP::get(p_type, stod(value));
       }
-      StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());             
+         StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());
+         p_store->setAlignment(align_size);
+      std::cout<<"Insert Value: "<<value<<std::endl;
+      codegen.insertSymbol(var_name, p_alloc);             
      return p_alloc;
 }
 
@@ -116,10 +122,20 @@ llvm::Value* CReturn::codeGenerate(CodeGenerator& codegen)
 {
    Type* type = codegen.getCurrentFunction()->getReturnType();
    Value* p_val = nullptr;
-   if(type->isIntegerTy())
-      p_val = ConstantInt::get(type, stoi(value), true);
-   else if(type->isFloatTy() || type->isDoubleTy())
-      p_val = ConstantFP::get(type, stod(value));
+   if(this->mode == 0)
+   {
+      if(type->isIntegerTy())
+        p_val = ConstantInt::get(type, stoi(value), true);
+      else if(type->isFloatTy() || type->isDoubleTy())
+        p_val = ConstantFP::get(type, stod(value));
 
-   return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
+      return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
+   }else if(this->mode == 1)
+   {
+     std::cout<<"find for ident: "<<value<<std::endl;
+     p_val = codegen.getSymbolValue(value);
+     return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
+   }
+
+   return nullptr;
 }
