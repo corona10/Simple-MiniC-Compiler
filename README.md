@@ -4,7 +4,19 @@ Simple Mini C Compiler
 ==============
 
 
-Objective: Implementing a simple Mini C comiler with LLVM 3.4
+#Objective: Implementing a simple Mini C comiler with LLVM 3.4
+#프로젝트 목표
+  - LLVM 3.4로 미니 C컴파일러를 구현해보자..
+  - 처음엔 완전한 c언어 구현이 목표였으나.. 아직 그 정도 만들능력은 안됨을 자각..
+  - 함수 호출하고 반복문 실행해서 put함수로 화면에 뿌리는 정도만 해보자..
+  - 할 수 있으면 scanf()정도까지 구현해볼까??
+# 진행상태
+
+  - c언어 스타일로 main 함수와 기타 함수 정의 가능
+  - 기타 구현은 계속 진행중
+  - .bc파일 자동으로 생성 (./result/ 디렉토리에..)
+  - .bc파일을 llvm 인터프리터로 실행가능
+  - 바이너리 파일 뽑아낼 계획임.
 
 # 문법 구현 상태
   - int float double 형 변수 선언 가능
