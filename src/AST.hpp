@@ -9,6 +9,7 @@
 #include "llvm/IR/Instruction.h"
 #include <llvm/IR/Value.h>
 #include <stack>
+#include <vector>
 #include "CodeGenerator.hpp"
 
 class CBaseAST;
@@ -94,6 +95,18 @@ class CFunctionDefine : public CBaseAST
 
 };
 
+class CFunctionCall : public CBaseAST
+{
+      public:
+      std::vector<std::string> parameter_list;
+      CFunctionCall()
+      {
+
+      }
+     
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+
+};
 class CBlock : public CBaseAST
 {
       public:

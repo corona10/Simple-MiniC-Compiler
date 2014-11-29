@@ -49,6 +49,11 @@ class  CodeGenerator{
              this->GLsymbol_table[key] = val;
        }
        
+        void insertFunctionTable(std::string key, Value* val)
+       {
+             this->GLfunction_table[key] = val;
+              std::cout<<"Function Symbol Size: "<< GLfunction_table.size()<<std::endl;
+       }
        llvm::BasicBlock* getCurrentBlock()
        {
             return block_stack.top();
@@ -64,13 +69,20 @@ class  CodeGenerator{
        llvm::Value* getSymbolValue(std::string key)
        {
              return this->GLsymbol_table[key];
-       } 
+       }
+
+       llvm::Value* getFunctionValue(std::string key)
+       {
+             return this->GLfunction_table[key];
+       }
        llvm::Module* getModule(){return this->_module;}
        private:
 
        llvm::Module*   _module;
        std::stack<BasicBlock*> block_stack;
        std::stack<Function*> function_stack;
+       
+       std::map<std::string, llvm::Value*> GLfunction_table;
        std::map<std::string, llvm::Value*> GLsymbol_table;  
        //std::stack<CFunctionDefine*> function_stack;
 };

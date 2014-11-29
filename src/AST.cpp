@@ -1,6 +1,7 @@
 #include "AST.hpp"
 #include "CodeGenerator.hpp"
 #include "parser.hpp"
+
 static Type* getTypeOf(std::string type)
 {
    if(type == "int")
@@ -81,7 +82,8 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
              iter++;           
         }
         
-     }     
+     }
+     codegen.insertFunctionTable(this->function_name, p_func);    
      return p_func;
 }
 
@@ -139,4 +141,13 @@ llvm::Value* CReturn::codeGenerate(CodeGenerator& codegen)
    }
 
    return nullptr;
+}
+
+llvm::Value* CFunctionCall::codeGenerate(CodeGenerator& codegen)
+{
+      /**
+      std::vector<llvm::Type* > putsArgs;
+      llvm::ArraryRef<llvm::Type*> argRef(putsArgs);
+      **/
+      return nullptr;
 }

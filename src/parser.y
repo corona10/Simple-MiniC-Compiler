@@ -46,12 +46,29 @@
 
 program : definition { pRoot = $1;}
         ;
-definition  : definition function_def {$1->AST_List.push_back($2);}
-            | function_def {$$ = new CRootAST(); $$->AST_List.push_back($1);}
-            | stmt {$$ = new CRootAST();}
+definition  : definition function_def 
+               {
+                 $1->AST_List.push_back($2);
+               }
+            | function_def
+              {
+               $$ = new CRootAST();
+               $$->AST_List.push_back($1);
+              }
+            | stmt
+              {
+               $$ = new CRootAST();
+              }
             ;
-function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts { std::cout<<"function def"<<std::endl;}
-             | type TIDENT TLSBRACE TRSBRACE block_stmts { $$ = new CFunctionDefine(*$1, *$2); $$->block_list.push_back($5); }
+function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts
+               {
+                  std::cout<<"function def"<<std::endl;
+               }
+             | type TIDENT TLSBRACE TRSBRACE block_stmts 
+               { 
+                 $$ = new CFunctionDefine(*$1, *$2);
+                 $$->block_list.push_back($5);
+                }
              ;
 block_stmts : TLBRACE stmts TRBRACE  {$$ = $2;}
             | TLBRACE TRBRACE        {$$ = new CBlock("entry");}
