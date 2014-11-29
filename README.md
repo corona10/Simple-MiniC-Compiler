@@ -6,6 +6,22 @@ Simple Mini C Compiler
 
 Objective: Implementing a simple Mini C comiler with LLVM 3.4
 
+# 문법 구현 상태
+  - int float double 형 변수 선언 가능
+    ex) int a;
+        int b = 5; 
+        float c = 4.5;
+   - 함수 정의 가능 (매개변수 추가는 기능 구현중..)
+     ex) int sum()
+         {
+            int a = 3;
+            return a;
+         }
+      int, double, float, void 형으로 정의 가능
+   - 함수 호출 (기능 구현 중..)
+   - 반복문 구현 (기능 구현 예정 중..)
+   - 내장함수 구현 중..( 기능 구현 중..)
+   
 
 # License
 -----------------------------------------------------------------------------
