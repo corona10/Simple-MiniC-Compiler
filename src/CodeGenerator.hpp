@@ -51,6 +51,7 @@ class  CodeGenerator{
        
         void insertFunctionTable(std::string key, Value* val)
        {
+             std::cout<<"insert symbol function name: "<<key<<std::endl;
              this->GLfunction_table[key] = val;
               std::cout<<"Function Symbol Size: "<< GLfunction_table.size()<<std::endl;
        }

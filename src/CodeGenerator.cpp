@@ -9,7 +9,7 @@ void CodeGenerator::generateIR(CRootAST& root)
    llvm::LLVMContext & context = llvm::getGlobalContext();
    
    root.codeGenerate(*this);
-   llvm::IRBuilder<> builder(context);;
+   llvm::IRBuilder<> builder(context);
    std::vector<llvm::Type*> putsArgs;
    putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
    llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);

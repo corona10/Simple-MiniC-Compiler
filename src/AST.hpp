@@ -99,7 +99,10 @@ class CFunctionCall : public CBaseAST
 {
       public:
       std::vector<std::string> parameter_list;
-      CFunctionCall()
+      std::string function_name;
+
+      CFunctionCall(std::string name)
+                   : function_name(name)
       {
 
       }

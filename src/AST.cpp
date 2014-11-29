@@ -61,7 +61,7 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
       }
          StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());
          p_store->setAlignment(align_size);
-      std::cout<<"Insert Value: "<<value<<std::endl;
+     // std::cout<<"Insert Value: "<<value<<std::endl;
       codegen.insertSymbol(var_name, varValue);             
      return p_alloc;
 }
@@ -70,7 +70,8 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
-     std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;
+    // std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;
+     codegen.insertFunctionTable(this->function_name, p_func);
      codegen.pushFunction(p_func); 
      if(this->block_list.size() > 0)
      {
@@ -82,8 +83,7 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
              iter++;           
         }
         
-     }
-     codegen.insertFunctionTable(this->function_name, p_func);    
+     } 
      return p_func;
 }
 
@@ -134,7 +134,7 @@ llvm::Value* CReturn::codeGenerate(CodeGenerator& codegen)
       return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
    }else if(this->mode == 1)
    {
-     std::cout<<"find for ident: "<<value<<std::endl;
+     //std::cout<<"find for ident: "<<value<<std::endl;
      p_val = codegen.getSymbolValue(value);
      //llvm::LoadInst* p_load = new llvm::LoadInst(p_val, "", false, codegen.getCurrentBlock());
      return llvm::ReturnInst::Create(getGlobalContext(), p_val, codegen.getCurrentBlock());
@@ -149,5 +149,7 @@ llvm::Value* CFunctionCall::codeGenerate(CodeGenerator& codegen)
       std::vector<llvm::Type* > putsArgs;
       llvm::ArraryRef<llvm::Type*> argRef(putsArgs);
       **/
-      return nullptr;
+     Function* p_func = codegen.getModule()->getFunction(this->function_name);
+     CallInst* p_call = CallInst::Create(p_func, "", codegen.getCurrentBlock());
+      return p_call;
 }

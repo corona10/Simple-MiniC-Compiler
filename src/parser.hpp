@@ -92,8 +92,9 @@ union YYSTYPE
    CVarDeclare* var_declare;
    CReturn* return_inst;
    CBaseAST* base;
+   CFunctionCall* func_call;
 
-#line 97 "parser.hpp" /* yacc.c:1909  */
+#line 98 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
