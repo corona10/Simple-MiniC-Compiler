@@ -83,6 +83,7 @@ class CFunctionDefine : public CBaseAST
      public:
       std::string type;
       std::string function_name;
+      std::vector<CVarDeclare*> para_var;
       std::vector<CBlock*> block_list;
       
       std::map<std::string, Value*> function_symbol_table;

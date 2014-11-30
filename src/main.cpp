@@ -2,9 +2,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <thread>
 #include "CodeGenerator.hpp"
 #include "AST.hpp"
 #include "parser.hpp"
+
 
 extern FILE* yyin;
 extern int yyparse();
@@ -28,6 +30,5 @@ int main(int argc, char* argv[])
     std::cout<<"<info> Generating LLVM IR Code..."<<std::endl;
     CodeGenerator codegen;
     codegen.generateIR(*pRoot);
-    std::cout<<"<info> Generating LLVM IR Code completed..."<<std::endl;
     return 0;
 }
