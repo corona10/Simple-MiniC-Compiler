@@ -4,7 +4,7 @@ Simple Mini C Compiler
 ==============
 
 
-#Objective: Implementing a simple Mini C comiler with LLVM 3.4
+#Objective: Implementing a simple Mini C comiler with LLVM 3.5
 #프로젝트 목표
   - LLVM 3.4(->3,5로 변경됨.)로 미니 C컴파일러를 구현해보자..
   - 처음엔 완전한 c언어 구현이 목표였으나.. 아직 그 정도 만들능력은 안됨을 자각..
