@@ -1,7 +1,7 @@
 #include "llvm/Support/ToolOutputFile.h"
 #include "llvm/Bitcode/ReaderWriter.h"
 #include "llvm/Support/raw_ostream.h"
-
+#include "llvm/Support/FileSystem.h"
 #include "CodeGenerator.hpp"
 #include "AST.hpp"
 void CodeGenerator::generateIR(CRootAST& root)
@@ -21,7 +21,7 @@ void CodeGenerator::generateIR(CRootAST& root)
    this->insertFunctionTable("puts", putsFunc);
         
    std::string ErrorInfo;
-   OwningPtr<tool_output_file> Out(new tool_output_file("./result/test.bc", ErrorInfo, sys::fs::F_None));
+   std::auto_ptr<tool_output_file> Out(new tool_output_file("./result/test.bc", ErrorInfo, llvm::sys::fs::OpenFlags::F_None));
 
    WriteBitcodeToFile(this->_module, Out->os());
    Out->keep(); 
