@@ -69,7 +69,17 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
-     std::cout<<"para_list: "<<this->para_var.size()<<std::endl;
+     
+     std::vector<Type*> FuncTy_args;
+     if( this->para_var.size() > 0)
+     {
+         for(auto para_iter = this->para_var.begin(); para_iter != this->para_var.end(); para_iter++)
+         {
+            FuncTy_args.push_back(getTypeOf((*para_iter)->type));
+         }
+         // 매개변수 있을 때 처리 할 로직 추가..
+     }
+     //llvm::FunctionType* p_ftype = FunctionType::get(getFuncTypeOf(this->type), FuncTy_args, false);
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
     // std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;

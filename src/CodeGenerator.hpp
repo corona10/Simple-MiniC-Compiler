@@ -30,7 +30,7 @@ class  CodeGenerator{
        CodeGenerator()
        {
          this->_module = new Module("test", getGlobalContext());
-         this->_module->setTargetTriple("x86_64-pc-linux-gnu"); 
+         //this->_module->setTargetTriple("x86_64-pc-linux-gnu"); 
        }
       
        void generateIR(CRootAST& root);
@@ -41,7 +41,9 @@ class  CodeGenerator{
 
        void pushFunction(llvm::Function* func)
        {
+             
              function_stack.push(func);
+             std::cout<<"InsertFunction..: "<<function_stack.size()<<std::endl;
        }
 
        void insertSymbol(std::string key, Value* val)

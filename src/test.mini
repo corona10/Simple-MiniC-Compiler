@@ -1,14 +1,8 @@
-int add(int x, int y)
-{
-  int x = 3;
-  return x;
-}
+
 int main()
 {
   
   int a= 5;
-  add();
-  add();
-  return a;
+  return 1;
 }
 
