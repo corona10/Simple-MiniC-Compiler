@@ -50,6 +50,7 @@ Simple Mini C Compiler
 # 현재 실행 가능한 소스코드 예제
   
    "'
+
      float what()
     {
        return 3.5;
@@ -67,6 +68,8 @@ Simple Mini C Compiler
      what();
      return 0;
     }
+
+
    "'
 
    "'
@@ -90,6 +93,7 @@ Simple Mini C Compiler
     %0 = call float @what()
     ret i32 0
    }
+
 
    "'
 # License
