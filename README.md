@@ -47,7 +47,51 @@ Simple Mini C Compiler
    - 반복문 구현 (기능 구현 예정 중..)
    - 내장함수 구현 중..( 기능 구현 중..)
    
+# 현재 실행 가능한 소스코드 예제
+  
+   "'
+     float what()
+    {
+       return 3.5;
+    }
+    
+    int add(int x, float y)
+    {
+      int a =3;
+      return a;
+    }
+    int main()
+    {
 
+     int a= 5;
+     what();
+     return 0;
+    }
+   "'
+
+   "'
+
+    define float @what() {
+      entry:
+      ret float 3.500000e+00
+    }
+
+    define i32 @add(i32, float) {
+     entry:
+     %a = alloca i32, align 4
+     store i32 3, i32* %a, align 4
+     ret i32 3
+   }
+
+   define i32 @main() {
+    entry:
+    %a = alloca i32, align 4
+    store i32 5, i32* %a, align 4
+    %0 = call float @what()
+    ret i32 0
+   }
+
+   "'
 # License
 -----------------------------------------------------------------------------
 
