@@ -69,6 +69,7 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
+     std::cout<<"para_list: "<<this->para_var.size()<<std::endl;
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
     // std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;

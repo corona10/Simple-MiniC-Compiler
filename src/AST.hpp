@@ -92,6 +92,12 @@ class CFunctionDefine : public CBaseAST
       {
           
       }
+
+      CFunctionDefine(std::string f_type, std::string f_name, std::vector<CVarDeclare*> var_vec)
+                        : type(f_type), function_name(f_name), para_var(var_vec)
+      {
+
+      }
      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };

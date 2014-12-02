@@ -12,6 +12,7 @@
 {
    int token;
    std::string *string;
+   std::vector<CVarDeclare*> *arg_vec;
    CFunctionDefine* func_define;
    CRootAST* root;
    CBlock*   block;
@@ -19,6 +20,7 @@
    CReturn* return_inst;
    CBaseAST* base;
    CFunctionCall* func_call;
+   
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
 %token TLBRACE TRBRACE TLSBRACE TRSBRACE
@@ -32,6 +34,7 @@
 %type <string> number TINT_VALUE TFLOAT_VALUE
 %type <string> type TINT TFLOAT TDOUBLE TVOID TRETURN
 %type <func_define> function_def
+%type <arg_vec> arg_list
 %type <root> definition
 %type <base> stmt
 %type <block> stmts block_stmts  
@@ -64,7 +67,8 @@ definition  : definition function_def
             ;
 function_def : type TIDENT TLSBRACE arg_list TRSBRACE  block_stmts
                {
-                  std::cout<<"function def"<<std::endl;
+                 $$ = new CFunctionDefine(*$1, *$2, *$4);
+                 $$->block_list.push_back($6);
                }
              | type TIDENT TLSBRACE TRSBRACE block_stmts 
                { 
@@ -99,7 +103,14 @@ para_list : para_list TCOMMA value
           | value
           ;
 arg_list : arg_list TCOMMA type TIDENT
+           {
+              $$->push_back(new CVarDeclare(*$3, *$4));
+           }
          | type TIDENT
+           {
+               $$ = new std::vector<CVarDeclare*>();
+               $$->push_back(new CVarDeclare(*$1, *$2));
+           }
          ;
 type  : TINT
       | TFLOAT

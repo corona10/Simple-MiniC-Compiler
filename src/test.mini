@@ -1,4 +1,4 @@
-int add()
+int add(int x, int y)
 {
   int x = 3;
   return x;
