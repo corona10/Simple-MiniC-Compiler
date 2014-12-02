@@ -20,6 +20,11 @@ static llvm::FunctionType* getFuncTypeOf(std::string f_type)
 {
        return llvm::FunctionType::get(getTypeOf(f_type), false); 
 }
+
+static llvm::FunctionType* getFuncTypeOf(std::string f_type,std::vector<Type*> para_list )
+{
+       return llvm::FunctionType::get(getTypeOf(f_type),para_list,false);
+}
 llvm::Value* CInt::codeGenerate(CodeGenerator& codegen)
 {
      Type* type = getTypeOf("int");
@@ -79,8 +84,8 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
          }
          // 매개변수 있을 때 처리 할 로직 추가..
      }
-     //llvm::FunctionType* p_ftype = FunctionType::get(getFuncTypeOf(this->type), FuncTy_args, false);
-     llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
+     llvm::FunctionType* p_ftype = getFuncTypeOf(this->type, FuncTy_args);
+    // llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
     // std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;
      codegen.insertFunctionTable(this->function_name, p_func);

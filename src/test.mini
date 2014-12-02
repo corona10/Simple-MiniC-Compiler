@@ -1,8 +1,17 @@
-
+float what()
+{
+  return 3.5;
+}
+int add(int x, float y)
+{
+   int a =3;
+   return a;
+}
 int main()
 {
   
   int a= 5;
-  return 1;
+  what();
+  return 0;
 }
 
