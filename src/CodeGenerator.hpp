@@ -43,7 +43,7 @@ class  CodeGenerator{
        {
              
              function_stack.push(func);
-             std::cout<<"InsertFunction..: "<<function_stack.size()<<std::endl;
+             //std::cout<<"InsertFunction..: "<<function_stack.size()<<std::endl;
        }
 
        void insertSymbol(std::string key, Value* val)

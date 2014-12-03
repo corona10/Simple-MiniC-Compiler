@@ -27,4 +27,6 @@ void CodeGenerator::generateIR(CRootAST& root)
    Out->keep(); 
    this->_module->dump();
    std::cout<<"Finish dump"<<std::endl;
+   std::cout<<"This Compiler is based on LLVM 3.5"<<std::endl;
+   delete this->_module;
 }
