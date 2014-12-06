@@ -80,14 +80,26 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
      {
          for(auto para_iter = this->para_var.begin(); para_iter != this->para_var.end(); para_iter++)
          {
-            FuncTy_args.push_back(getTypeOf((*para_iter)->type));
+            Type* p_type = getTypeOf((*para_iter)->type);
+            //p_type->setName((*para_iter)->var_name);
+            FuncTy_args.push_back(p_type);
          }
          // 매개변수 있을 때 처리 할 로직 추가..
      }
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type, FuncTy_args);
     // llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
-    // std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;
+     
+     Function::arg_iterator args = p_func->arg_begin();
+     auto para_iter = this->para_var.begin();
+  
+     while(args != p_func->arg_end())
+     {
+           args->setName((*para_iter)->var_name);
+           args++;
+           para_iter++;
+     }
+     // std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;
      codegen.insertFunctionTable(this->function_name, p_func);
      codegen.pushFunction(p_func); 
      if(this->block_list.size() > 0)
