@@ -13,6 +13,7 @@
    int token;
    std::string *string;
    std::vector<CVarDeclare*> *arg_vec;
+   std::vector<CValue*> *para_vec;
    CFunctionDefine* func_define;
    CRootAST* root;
    CBlock*   block;
@@ -35,6 +36,7 @@
 %type <string> type TINT TFLOAT TDOUBLE TVOID TRETURN
 %type <func_define> function_def
 %type <arg_vec> arg_list
+%type <para_vec> para_list
 %type <root> definition
 %type <base> stmt
 %type <block> stmts block_stmts  
@@ -87,7 +89,7 @@ stmt    : var_decl TSEMI { $$ = $1;}
         | function_call TSEMI { $$ = $1; }
         | return_inst TSEMI {$$ = $1;}
         ;
-function_call : TIDENT TLSBRACE para_list TRSBRACE { $$ = new CFunctionCall(*$1);}
+function_call : TIDENT TLSBRACE para_list TRSBRACE { $$ = new CFunctionCall(*$1, *$3);}
               | TIDENT TLSBRACE TRSBRACE { $$ = new CFunctionCall(*$1);}
               ;
 
@@ -99,8 +101,15 @@ var_decl : type  TIDENT  { $$ = new CVarDeclare(*$1, *$2);}
          | type  TIDENT TASSIGN number  {$$ = new CVarDeclare(*$1, *$2, *$4);}
          ;
          
-para_list : para_list TCOMMA value
-          | value
+para_list : para_list TCOMMA TIDENT
+            {
+                 $$->push_back(new CValue("unknown", *$3));
+            }
+          | TIDENT
+            {
+               $$ = new std::vector<CValue*>();
+               $$->push_back(new CValue("unknown", *$1));
+            }
           ;
 arg_list : arg_list TCOMMA type TIDENT
            {

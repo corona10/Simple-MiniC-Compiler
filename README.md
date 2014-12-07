@@ -11,91 +11,115 @@ Simple Mini C Compiler
   - 함수 호출하고 반복문 실행해서 put함수로 화면에 뿌리는 정도만 해보자..
   - 할 수 있으면 scanf()정도까지 구현해볼까??
 # 진행상태
-
-  - c언어 스타일로 main 함수와 기타 함수 정의 가능
   - 기타 구현은 계속 진행중
   - .bc파일 자동으로 생성 (./result/ 디렉토리에..)
   - .bc파일을 llvm 인터프리터로 실행가능
   - .bc파일을 바이너리 파일 뽑아낼 계획임.
   - 함수 호출 구현완료 2014/11/29
-  - 함수 매개변수 구현 시작 2014-12-02
+  - 함수 매개변수 구현 완료  2014/12/02
 
 # 문법 구현 상태
   - int float double 형 변수 선언 가능
     ex)
  
-    "'
+    '
 
         int a;
         int b = 5; 
         float c = 4.5;
 
-    "'
-   - 함수 정의 가능 (매개변수 추가는 기능 구현중..)
+    '
+   - 함수 정의 가능
      ex)
  
-     "'
+     '
+
          int sum()
          {
             int a = 3;
             return a;
          }
-     "'
+     
+     '
 
       int, double, float, void 형으로 정의 가능
-   - 함수 호출 구현 완료 (매개 변수 없이..)
+   - 함수 호출 구현 완료 
    - 반복문 구현 (기능 구현 예정 중..)
    - 내장함수 구현 중..( 기능 구현 중..)
    
 # 현재 실행 가능한 소스코드 예제
   
-   "'
+    **<예제 코드>**
 
+
+   '
+
+     int function_test(int hello)
+     {
+        return 1;
+     }
+  
      float what()
-    {
+     {
        return 3.5;
-    }
+     }
     
     int add(int x, float y)
     {
-      int a =3;
-      return a;
+       int a =3;
+       return a;
     }
+    
     int main()
     {
-
-     int a= 5;
-     what();
-     return 0;
+  
+       int a= 5;
+       float c = 3.5;
+       what();
+       function_test(a);
+       add(a, c);
+       return 0;
     }
 
 
-   "'
+   '
 
-   "'
+    **<LLVM IR 코드 결과물>**
 
-    define float @what() {
+
+   '
+
+    
+     define i32 @function_test(i32 %hello) {
+       entry:
+       ret i32 1
+     }
+
+     define float @what() {
+       entry:
+       ret float 3.500000e+00
+    }
+
+    define i32 @add(i32 %x, float %y) {
+       entry:
+       %a = alloca i32, align 4
+      store i32 3, i32* %a, align 4
+      ret i32 3
+   } 
+
+    define i32 @main() {
       entry:
-      ret float 3.500000e+00
-    }
-
-    define i32 @add(i32, float) {
-     entry:
-     %a = alloca i32, align 4
-     store i32 3, i32* %a, align 4
-     ret i32 3
+      %a = alloca i32, align 4
+      store i32 5, i32* %a, align 4
+      %c = alloca float, align 4
+     store float 3.500000e+00, float* %c, align 4
+     %0 = call float @what()
+     %1 = call i32 @function_test(i32 5)
+     %2 = call i32 @add(i32 5, float 3.500000e+00)
+     ret i32 0
    }
 
-   define i32 @main() {
-    entry:
-    %a = alloca i32, align 4
-    store i32 5, i32* %a, align 4
-    %0 = call float @what()
-    ret i32 0
-   }
-
-
-   "'
+   '
 # License
 -----------------------------------------------------------------------------
 

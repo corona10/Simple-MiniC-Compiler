@@ -1,3 +1,7 @@
+int function_test(int hello)
+{
+  return 1;
+}
 float what()
 {
   return 3.5;
@@ -11,7 +15,10 @@ int main()
 {
   
   int a= 5;
+  float c = 3.5;
   what();
+  function_test(a);
+  add(a, c);
   return 0;
 }
 

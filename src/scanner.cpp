@@ -2010,6 +2010,7 @@ union YYSTYPE
    int token;
    std::string *string;
    std::vector<CVarDeclare*> *arg_vec;
+   std::vector<CValue*> *para_vec;
    CFunctionDefine* func_define;
    CRootAST* root;
    CBlock*   block;
@@ -2019,7 +2020,7 @@ union YYSTYPE
    CFunctionCall* func_call;
    
 
-#line 100 "parser.hpp" /* yacc.c:1909  */
+#line 101 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

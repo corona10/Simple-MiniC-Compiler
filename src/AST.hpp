@@ -77,6 +77,20 @@ class CVarDeclare : public CBaseAST
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };
+class CValue : public CBaseAST
+{
+    public:
+     std::string type;
+     std::string value;
+
+     CValue(std::string ty, std::string val)
+           : type(ty), value(val)
+     {
+     }
+
+     virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+
+};
 
 class CFunctionDefine : public CBaseAST
 {
@@ -105,7 +119,7 @@ class CFunctionDefine : public CBaseAST
 class CFunctionCall : public CBaseAST
 {
       public:
-      std::vector<std::string> parameter_list;
+      std::vector<CValue*> parameter_list;
       std::string function_name;
 
       CFunctionCall(std::string name)
@@ -113,6 +127,12 @@ class CFunctionCall : public CBaseAST
       {
 
       }
+     
+      CFunctionCall(std::string name, std::vector<CValue*> para_list)
+                   : function_name(name), parameter_list(para_list)
+     {
+     
+     }
      
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 

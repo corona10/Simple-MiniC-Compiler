@@ -72,6 +72,15 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
      return p_alloc;
 }
 
+llvm::Value* CValue::codeGenerate(CodeGenerator& codegen)
+{
+    Value* p_value  = nullptr;
+   if(this->type == "unknown")
+   { 
+      p_value = codegen.getSymbolValue(this->value);
+   }
+   return p_value;
+}
 llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
      
@@ -178,7 +187,20 @@ llvm::Value* CFunctionCall::codeGenerate(CodeGenerator& codegen)
       std::vector<llvm::Type* > putsArgs;
       llvm::ArraryRef<llvm::Type*> argRef(putsArgs);
       **/
+     //std::cout<<"parameter size: "<< this->parameter_list.size()<<std::endl;
      Function* p_func = codegen.getModule()->getFunction(this->function_name);
-     CallInst* p_call = CallInst::Create(p_func, "", codegen.getCurrentBlock());
-      return p_call;
+     if(this->parameter_list.size() > 0)
+     {
+        std::vector<Value*> params;
+        for(auto iter = this->parameter_list.begin(); iter != this->parameter_list.end(); iter++)
+        {
+            params.push_back((*iter)->codeGenerate(codegen));
+        }
+        CallInst* p_call = CallInst::Create(p_func, params, "", codegen.getCurrentBlock());
+        return p_call;
+     }else{
+        CallInst* p_call = CallInst::Create(p_func, "", codegen.getCurrentBlock());
+        return p_call;
+     }
+        return nullptr;
 }
