@@ -21,6 +21,7 @@
    CReturn* return_inst;
    CBaseAST* base;
    CFunctionCall* func_call;
+   CNumber* num;
    
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
@@ -43,6 +44,7 @@
 %type <var_declare> var_decl
 %type <return_inst> return_inst
 %type <func_call>  function_call
+%type <num> number
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -88,6 +90,7 @@ stmts   : stmt {$$ = new CBlock("entry"); $$->instruction_list.push_back($1);}
 stmt    : var_decl TSEMI { $$ = $1;}
         | function_call TSEMI { $$ = $1; }
         | return_inst TSEMI {$$ = $1;}
+        | assignment TSEMI
         ;
 function_call : TIDENT TLSBRACE para_list TRSBRACE { $$ = new CFunctionCall(*$1, *$3);}
               | TIDENT TLSBRACE TRSBRACE { $$ = new CFunctionCall(*$1);}
@@ -121,15 +124,35 @@ arg_list : arg_list TCOMMA type TIDENT
                $$->push_back(new CVarDeclare(*$1, *$2));
            }
          ;
+
+assignment : TIDENT TEQUAL assignment
+           | TIDENT TPLUS  assignment
+           | TIDENT TMINUS assignment
+           | TIDENT TMUL assignment
+           | TIDENT TDIVIDE assignment
+           | TIDENT TMODULO assignment
+           | number TEQUAL assignment
+           | number TPLUS assignment
+           | number TMINUS assignment
+           | number TMUL assignment
+           | number TDIVIDE assignment
+           | number TMODULO assignment
+           | number
+           | TIDENT
+           ;
 type  : TINT
       | TFLOAT
       | TDOUBLE
       ;
-value : number
-      | TIDENT
-      ;
-number : TINT_VALUE 
+number : TINT_VALUE
+        {
+           $$ = new CNumber("int", *$1);
+        }
        | TFLOAT_VALUE
+        {
+          $$ = new CNumber("fp", *$1);
+        }
+       
        ;
               
 %%

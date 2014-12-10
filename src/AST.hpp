@@ -19,7 +19,9 @@ class CBaseAST
 {
       public:
         virtual ~CBaseAST(){}
-        virtual llvm::Value* codeGenerate(CodeGenerator& codegen) = 0;
+        virtual llvm::Value* codeGenerate(CodeGenerator& codegen)
+       {
+       }
 };
 
 class CRootAST
@@ -91,7 +93,23 @@ class CValue : public CBaseAST
      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };
+class CBinaryOperator
+{
+      public:
+      CBaseAST& LHS;
+      CBaseAST& RHS;
+      std::string bin_op;
 
+      CBinaryOperator(CBaseAST L, std::string op, CBaseAST R)
+                     : LHS(L), bin_op(op), RHS(R)
+      {
+
+      }
+
+      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+
+
+};
 class CFunctionDefine : public CBaseAST
 {
      public:
@@ -165,6 +183,22 @@ class CReturn : public CBaseAST
           :mode(md), value(val)
    {
    }
+   virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
+
+};
+
+class CNumber : public CBaseAST
+{
+   public:
+   std::string type;
+   std::string value;
+
+   CNumber(std::string ty, std::string val)
+          : type(ty), value(val)
+   {
+
+   }
+
    virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };

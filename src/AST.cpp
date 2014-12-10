@@ -45,27 +45,16 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
       Type* p_type = getTypeOf(this->type);
       AllocaInst* p_alloc = new AllocaInst(p_type, this->var_name.c_str(), codegen.getCurrentBlock());
 
-      Value* varValue = nullptr;
+      Value* varValue = new CNumber(this->type, this->value).codeGenerate(codegen);
       int align_size = 0;
-      if(this->type == "int")
-      {
-         align_size = 4;
-         p_alloc->setAlignment(align_size);
-         varValue = ConstantInt::get(p_type, stoi(value), true);
-      }else if(this->type == "float")
-      {
-         align_size = 4;
-         p_alloc->setAlignment(align_size);
-         varValue = ConstantFP::get(p_type, stod(value));
-      }
+      if(this->type == "int" || this->type == "float")  
+          align_size = 4;
       else if(this->type == "double")
-      {
          align_size = 8;
-         p_alloc->setAlignment(align_size);
-         varValue = ConstantFP::get(p_type, stod(value));
-      }
-         StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());
-         p_store->setAlignment(align_size);
+        
+      p_alloc->setAlignment(align_size);   
+      StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());
+      p_store->setAlignment(align_size);
      // std::cout<<"Insert Value: "<<value<<std::endl;
       codegen.insertSymbol(var_name, varValue);
                     
@@ -203,4 +192,22 @@ llvm::Value* CFunctionCall::codeGenerate(CodeGenerator& codegen)
         return p_call;
      }
         return nullptr;
+}
+
+llvm::Value* CNumber::codeGenerate(CodeGenerator& codegen)
+{
+    Type* p_type = getTypeOf(this->type);   
+    Value* varValue = nullptr;
+
+    if(this->type == "int")
+       varValue = ConstantInt::get(p_type, stoi(value), true);
+    else if(this->type == "fp")
+       varValue = ConstantFP::get(p_type, stod(value));
+  
+   return varValue;
+}
+
+llvm::Value* CBinaryOperator::codeGenerate(CodeGenerator& codegen)
+{
+     return nullptr;
 }
