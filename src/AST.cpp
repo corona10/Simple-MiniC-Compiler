@@ -45,7 +45,9 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
       Type* p_type = getTypeOf(this->type);
       AllocaInst* p_alloc = new AllocaInst(p_type, this->var_name.c_str(), codegen.getCurrentBlock());
 
-      Value* varValue = new CNumber(this->type, this->value).codeGenerate(codegen);
+      CNumber* p_number = new CNumber(this->type, this->value);
+      Value* varValue = p_number->codeGenerate(codegen);
+
       int align_size = 0;
       if(this->type == "int" || this->type == "float")  
           align_size = 4;
@@ -57,7 +59,7 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
       p_store->setAlignment(align_size);
      // std::cout<<"Insert Value: "<<value<<std::endl;
       codegen.insertSymbol(var_name, varValue);
-                    
+     delete p_number;                    
      return p_alloc;
 }
 
@@ -201,7 +203,7 @@ llvm::Value* CNumber::codeGenerate(CodeGenerator& codegen)
 
     if(this->type == "int")
        varValue = ConstantInt::get(p_type, stoi(value), true);
-    else if(this->type == "fp")
+    else if(this->type == "float" || this->type == "double")
        varValue = ConstantFP::get(p_type, stod(value));
   
    return varValue;

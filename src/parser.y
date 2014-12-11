@@ -21,7 +21,7 @@
    CReturn* return_inst;
    CBaseAST* base;
    CFunctionCall* func_call;
-   CNumber* num;
+   //CNumber* num;
    
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
@@ -44,7 +44,6 @@
 %type <var_declare> var_decl
 %type <return_inst> return_inst
 %type <func_call>  function_call
-%type <num> number
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -146,11 +145,11 @@ type  : TINT
       ;
 number : TINT_VALUE
         {
-           $$ = new CNumber("int", *$1);
+           //$$ = new CNumber("int", *$1);
         }
        | TFLOAT_VALUE
         {
-          $$ = new CNumber("fp", *$1);
+          //$$ = new CNumber("fp", *$1);
         }
        
        ;
