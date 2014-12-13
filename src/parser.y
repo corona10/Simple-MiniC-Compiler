@@ -21,7 +21,8 @@
    CReturn* return_inst;
    CBaseAST* base;
    CFunctionCall* func_call;
-   //CNumber* num;
+   CBinaryOperator* binary_op;
+   CNumber* num;
    
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
@@ -33,7 +34,7 @@
 %token TRETURN
 
 %type <string> TIDENT 
-%type <string> number TINT_VALUE TFLOAT_VALUE
+%type <string>  TINT_VALUE TFLOAT_VALUE
 %type <string> type TINT TFLOAT TDOUBLE TVOID TRETURN
 %type <func_define> function_def
 %type <arg_vec> arg_list
@@ -44,6 +45,9 @@
 %type <var_declare> var_decl
 %type <return_inst> return_inst
 %type <func_call>  function_call
+%type <binary_op> binary_ops
+%type <num> number
+%type <token> OP TPLUS TMINUS TMUL TDIVIDE TMODULO TASSIGN TEQUAL
 %left TPLUS TMINUS
 %left TMUL TDIV
 %right TEQUAL
@@ -89,7 +93,7 @@ stmts   : stmt {$$ = new CBlock("entry"); $$->instruction_list.push_back($1);}
 stmt    : var_decl TSEMI { $$ = $1;}
         | function_call TSEMI { $$ = $1; }
         | return_inst TSEMI {$$ = $1;}
-        | assignment TSEMI
+        | binary_ops TSEMI  {$$ = $1;}
         ;
 function_call : TIDENT TLSBRACE para_list TRSBRACE { $$ = new CFunctionCall(*$1, *$3);}
               | TIDENT TLSBRACE TRSBRACE { $$ = new CFunctionCall(*$1);}
@@ -100,7 +104,8 @@ return_inst  : TRETURN TINT_VALUE {$$ = new CReturn(0, *$2);}
              | TRETURN TIDENT {$$ = new CReturn(1, *$2);}
              ;
 var_decl : type  TIDENT  { $$ = new CVarDeclare(*$1, *$2);}
-         | type  TIDENT TASSIGN number  {$$ = new CVarDeclare(*$1, *$2, *$4);}
+         | type  TIDENT TASSIGN TINT_VALUE  {$$ = new CVarDeclare(*$1, *$2, *$4);}
+         | type  TIDENT TASSIGN TFLOAT_VALUE  {$$ = new CVarDeclare(*$1, *$2, *$4);}
          ;
          
 para_list : para_list TCOMMA TIDENT
@@ -123,33 +128,40 @@ arg_list : arg_list TCOMMA type TIDENT
                $$->push_back(new CVarDeclare(*$1, *$2));
            }
          ;
-
-assignment : TIDENT TEQUAL assignment
-           | TIDENT TPLUS  assignment
-           | TIDENT TMINUS assignment
-           | TIDENT TMUL assignment
-           | TIDENT TDIVIDE assignment
-           | TIDENT TMODULO assignment
-           | number TEQUAL assignment
-           | number TPLUS assignment
-           | number TMINUS assignment
-           | number TMUL assignment
-           | number TDIVIDE assignment
-           | number TMODULO assignment
-           | number
-           | TIDENT
-           ;
+OP : TPLUS | TEQUAL | TMINUS | TMUL | TDIVIDE | TMODULO | TASSIGN
+   ;
+binary_ops : number  OP  binary_ops
+             {
+                $$ = new CBinaryOperator(*$1, $2, *$3);
+             }
+            | TIDENT OP binary_ops
+             {
+                $$ = new CBinaryOperator(CValue("unknown", *$1), $2, *$3);
+             }
+            | number OP  number
+             {
+                $$ = new  CBinaryOperator(*$1, $2, *$3);
+             }
+            | TIDENT OP TIDENT
+             {
+               $$ = new CBinaryOperator(CValue("unknown", *$1), $2, CValue("unknwon", *$3));
+             } 
+           | TIDENT OP number
+             {
+              $$ = new CBinaryOperator(CValue("unknown", *$1), $2, *$3);
+             }
+          ;
 type  : TINT
       | TFLOAT
       | TDOUBLE
       ;
 number : TINT_VALUE
         {
-           //$$ = new CNumber("int", *$1);
+           $$ = new CNumber("int", *$1);
         }
        | TFLOAT_VALUE
         {
-          //$$ = new CNumber("fp", *$1);
+          $$ = new CNumber("fp", *$1);
         }
        
        ;

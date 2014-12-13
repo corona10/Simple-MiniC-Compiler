@@ -16,6 +16,7 @@ int main()
   
   int a= 5;
   float c = 3.5;
+  a = c + 1 -2 ;
   what();
   function_test(a);
   add(a, c);

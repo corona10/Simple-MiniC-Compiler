@@ -93,17 +93,17 @@ class CValue : public CBaseAST
      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
 
 };
-class CBinaryOperator
+class CBinaryOperator : public CBaseAST
 {
       public:
-      CBaseAST& LHS;
-      CBaseAST& RHS;
-      std::string bin_op;
+      CBaseAST LHS;
+      CBaseAST RHS;
+      int bin_op;
 
-      CBinaryOperator(CBaseAST L, std::string op, CBaseAST R)
+      CBinaryOperator(CBaseAST L, int op, CBaseAST R)
                      : LHS(L), bin_op(op), RHS(R)
       {
-
+          std::cout<<op<<std::endl;
       }
 
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
@@ -196,7 +196,6 @@ class CNumber : public CBaseAST
    CNumber(std::string ty, std::string val)
           : type(ty), value(val)
    {
-
    }
 
    virtual llvm::Value* codeGenerate(CodeGenerator& codegen);

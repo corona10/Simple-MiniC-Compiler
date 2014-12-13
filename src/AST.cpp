@@ -59,7 +59,8 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
       p_store->setAlignment(align_size);
      // std::cout<<"Insert Value: "<<value<<std::endl;
       codegen.insertSymbol(var_name, varValue);
-     delete p_number;                    
+      delete p_number;
+                    
      return p_alloc;
 }
 
@@ -198,12 +199,13 @@ llvm::Value* CFunctionCall::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CNumber::codeGenerate(CodeGenerator& codegen)
 {
+    std::cout<<"test"<<std::endl;
     Type* p_type = getTypeOf(this->type);   
     Value* varValue = nullptr;
 
     if(this->type == "int")
        varValue = ConstantInt::get(p_type, stoi(value), true);
-    else if(this->type == "float" || this->type == "double")
+    else if(this->type == "float" || this->type == "double" || this->type == "fp")
        varValue = ConstantFP::get(p_type, stod(value));
   
    return varValue;
@@ -211,5 +213,9 @@ llvm::Value* CNumber::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CBinaryOperator::codeGenerate(CodeGenerator& codegen)
 {
-     return nullptr;
+     Type* p_type = getTypeOf("int");
+      Value* varValue = nullptr;
+       varValue = ConstantInt::get(p_type, 999, true);
+
+   return varValue;
 }

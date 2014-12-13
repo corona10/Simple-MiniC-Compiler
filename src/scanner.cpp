@@ -2018,10 +2018,11 @@ union YYSTYPE
    CReturn* return_inst;
    CBaseAST* base;
    CFunctionCall* func_call;
-   //CNumber* num;
+   CBinaryOperator* binary_op;
+   CNumber* num;
    
 
-#line 102 "parser.hpp" /* yacc.c:1909  */
+#line 103 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
