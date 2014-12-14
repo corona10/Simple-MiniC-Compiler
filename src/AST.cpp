@@ -57,8 +57,9 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
       p_alloc->setAlignment(align_size);   
       StoreInst* p_store = new StoreInst(varValue, p_alloc, false, codegen.getCurrentBlock());
       p_store->setAlignment(align_size);
+      LoadInst* p_load = new LoadInst(p_alloc, "", false, codegen.getCurrentBlock());
      // std::cout<<"Insert Value: "<<value<<std::endl;
-      codegen.insertSymbol(var_name, varValue);
+      codegen.insertSymbol(var_name, p_load);
       delete p_number;
                     
      return p_alloc;
@@ -66,7 +67,9 @@ llvm::Value* CVarDeclare::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CValue::codeGenerate(CodeGenerator& codegen)
 {
-    Value* p_value  = nullptr;
+   // std::cout<<"CodeGenerate for CValue.."<<std::endl;
+   Value* p_value  = nullptr;
+   //std::cout<<"CValue  값 얻어오기.."<<std::endl;
    if(this->type == "unknown")
    { 
       p_value = codegen.getSymbolValue(this->value);
@@ -199,23 +202,46 @@ llvm::Value* CFunctionCall::codeGenerate(CodeGenerator& codegen)
 
 llvm::Value* CNumber::codeGenerate(CodeGenerator& codegen)
 {
-    std::cout<<"test"<<std::endl;
+    
     Type* p_type = getTypeOf(this->type);   
     Value* varValue = nullptr;
-
     if(this->type == "int")
+    { 
        varValue = ConstantInt::get(p_type, stoi(value), true);
+    }
     else if(this->type == "float" || this->type == "double" || this->type == "fp")
+    {
        varValue = ConstantFP::get(p_type, stod(value));
-  
+    }
    return varValue;
 }
 
 llvm::Value* CBinaryOperator::codeGenerate(CodeGenerator& codegen)
 {
-     Type* p_type = getTypeOf("int");
-      Value* varValue = nullptr;
-       varValue = ConstantInt::get(p_type, 999, true);
+   int operation = this->bin_op;
+   std::cout<<"operation: "<<operation<<std::endl;
+   Value* rvalue = (this->RHS)->codeGenerate(codegen);
+   Value* lvalue = (this->LHS)->codeGenerate(codegen);
+   //lvalue->dump();
 
-   return varValue;
+   Instruction::BinaryOps instruction;
+   if(operation == TASSIGN)
+   {
+      return new StoreInst(rvalue, ((LoadInst*)lvalue)->getPointerOperand(), false, codegen.getCurrentBlock());
+   }else if(operation == TPLUS)
+   {
+     instruction = Instruction::Add;
+   }else if(operation == TMINUS)
+   {
+
+     instruction = Instruction::Sub;
+   }else if(operation == TMUL)
+   {
+     instruction = Instruction::Mul;
+   }else if(operation == TDIVIDE)
+   {
+      instruction = Instruction::SDiv;
+   }
+
+   return  BinaryOperator::Create(instruction, lvalue, rvalue, "", codegen.getCurrentBlock());
 }

@@ -1,25 +1,9 @@
-int function_test(int hello)
-{
-  return 1;
-}
-float what()
-{
-  return 3.5;
-}
-int add(int x, float y)
-{
-   int a =3;
-   return a;
-}
+
 int main()
 {
   
   int a= 5;
-  float c = 3.5;
-  a = c + 1 -2 ;
-  what();
-  function_test(a);
-  add(a, c);
+  int b = 1; 
+  a =  a+b;
   return 0;
 }
-

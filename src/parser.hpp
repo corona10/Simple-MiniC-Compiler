@@ -97,9 +97,10 @@ union YYSTYPE
    CFunctionCall* func_call;
    CBinaryOperator* binary_op;
    CNumber* num;
+   CValue* val;
    
 
-#line 103 "parser.hpp" /* yacc.c:1909  */
+#line 104 "parser.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

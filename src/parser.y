@@ -23,6 +23,7 @@
    CFunctionCall* func_call;
    CBinaryOperator* binary_op;
    CNumber* num;
+   CValue* val;
    
 }
 %token TINT_VALUE TFLOAT_VALUE TIDENT
@@ -130,27 +131,17 @@ arg_list : arg_list TCOMMA type TIDENT
          ;
 OP : TPLUS | TEQUAL | TMINUS | TMUL | TDIVIDE | TMODULO | TASSIGN
    ;
-binary_ops : number  OP  binary_ops
-             {
-                $$ = new CBinaryOperator(*$1, $2, *$3);
-             }
-            | TIDENT OP binary_ops
-             {
-                $$ = new CBinaryOperator(CValue("unknown", *$1), $2, *$3);
-             }
-            | number OP  number
-             {
-                $$ = new  CBinaryOperator(*$1, $2, *$3);
-             }
-            | TIDENT OP TIDENT
-             {
-               $$ = new CBinaryOperator(CValue("unknown", *$1), $2, CValue("unknwon", *$3));
-             } 
-           | TIDENT OP number
-             {
-              $$ = new CBinaryOperator(CValue("unknown", *$1), $2, *$3);
-             }
-          ;
+binary_ops :  TIDENT  OP binary_ops
+              {
+                     CValue* val1 = new CValue("unknown", *$1);
+                     $$ = new CBinaryOperator(val1, $2, $3);
+               }
+           |  TIDENT OP TIDENT {
+                      CValue* val1 = new CValue("unknown", *$1);
+                      CValue* val2 = new CValue("unknown", *$3);
+                      $$ = new CBinaryOperator(val1 , $2 , val2);
+                   }
+           ;
 type  : TINT
       | TFLOAT
       | TDOUBLE
