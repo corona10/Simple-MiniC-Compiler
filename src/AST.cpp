@@ -219,7 +219,7 @@ llvm::Value* CNumber::codeGenerate(CodeGenerator& codegen)
 llvm::Value* CBinaryOperator::codeGenerate(CodeGenerator& codegen)
 {
    int operation = this->bin_op;
-   std::cout<<"operation: "<<operation<<std::endl;
+   // std::cout<<"operation: "<<operation<<std::endl;
    Value* rvalue = (this->RHS)->codeGenerate(codegen);
    Value* lvalue = (this->LHS)->codeGenerate(codegen);
    //lvalue->dump();
