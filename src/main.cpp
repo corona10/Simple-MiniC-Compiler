@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     fclose(yyin);
     }
     std::cout<<"<info> Generating LLVM IR Code..."<<std::endl;
-    CodeGenerator codegen;
+    CodeGenerator codegen(argv[2]);
     codegen.generateIR(*pRoot);
     return 0;
 }

@@ -32,6 +32,11 @@ class  CodeGenerator{
          this->_module = new Module("test", getGlobalContext());
          //this->_module->setTargetTriple("x86_64-pc-linux-gnu"); 
        }
+
+       CodeGenerator(std::string module_name)
+       {
+         this->_module = new Module(module_name.c_str(), getGlobalContext());
+       }
       
        void generateIR(CRootAST& root);
        void pushBlock(llvm::BasicBlock* blk)

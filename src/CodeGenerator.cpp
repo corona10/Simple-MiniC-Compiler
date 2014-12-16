@@ -19,9 +19,14 @@ void CodeGenerator::generateIR(CRootAST& root)
  
    std::cout<<"Add Embaded functions for smcc.."<<std::endl;
    this->insertFunctionTable("puts", putsFunc);
-        
+   
+   std::string ModuleId = this->_module->getModuleIdentifier();
+   std::string ResultDir = "./result/";
+   std::string BCfileName = ModuleId+".bc";
+
+   const char* generateFile = (ResultDir+BCfileName).c_str();
    std::string ErrorInfo;
-   std::auto_ptr<tool_output_file> Out(new tool_output_file("./result/test.bc", ErrorInfo, llvm::sys::fs::OpenFlags::F_None));
+   std::auto_ptr<tool_output_file> Out(new tool_output_file(generateFile, ErrorInfo, llvm::sys::fs::OpenFlags::F_None));
 
    WriteBitcodeToFile(this->_module, Out->os());
    Out->keep(); 

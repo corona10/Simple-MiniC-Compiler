@@ -107,8 +107,13 @@ class CBinaryOperator : public CBaseAST
       {
          
       }
+      virtual ~CBinaryOperator()
+      {
+           delete LHS;
+           delete RHS;
+      }
       virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
-
+       
 
 };
 class CFunctionDefine : public CBaseAST
