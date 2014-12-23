@@ -68,7 +68,7 @@ class  CodeGenerator{
        llvm::Function* getCurrentFunction()
        {
              Function* p_func = function_stack.top();
-             function_stack.pop();
+             //function_stack.pop();
              return p_func;
        }
        

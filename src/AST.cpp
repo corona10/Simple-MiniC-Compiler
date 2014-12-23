@@ -71,11 +71,27 @@ llvm::Value* CValue::codeGenerate(CodeGenerator& codegen)
    Value* p_value  = nullptr;
    //std::cout<<"CValue  값 얻어오기.."<<std::endl;
    if(this->type == "unknown")
-   { 
-      p_value = codegen.getSymbolValue(this->value);
+   {
+      llvm::Function* current_function = codegen.getCurrentFunction();
+     for( Function::arg_iterator args = current_function->arg_begin(); args != current_function->arg_end(); args++)
+     {
+          std::string value_name = args->getName().str();
+
+          if(value_name == this->value)
+          {
+              p_value = args;
+              break;
+          }else{
+              p_value = nullptr;
+          }
+     }
+
+      if(p_value == nullptr)
+         p_value = codegen.getSymbolValue(this->value);
    }
    return p_value;
 }
+
 llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
 {
      
@@ -93,7 +109,9 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
      llvm::FunctionType* p_ftype = getFuncTypeOf(this->type, FuncTy_args);
     // llvm::FunctionType* p_ftype = getFuncTypeOf(this->type);
      llvm::Function* p_func = llvm::Function::Create(p_ftype, llvm::Function::ExternalLinkage, this->function_name, codegen.getModule());
-     
+     codegen.insertFunctionTable(this->function_name, p_func);
+     codegen.pushFunction(p_func);
+
      Function::arg_iterator args = p_func->arg_begin();
      auto para_iter = this->para_var.begin();
   
@@ -104,8 +122,7 @@ llvm::Value* CFunctionDefine::codeGenerate(CodeGenerator& codegen)
            para_iter++;
      }
      // std::cout<<"* add instruction for function defination.. : "<< this->function_name <<std::endl;
-     codegen.insertFunctionTable(this->function_name, p_func);
-     codegen.pushFunction(p_func); 
+     
      if(this->block_list.size() > 0)
      {
         auto iter = this->block_list.begin();

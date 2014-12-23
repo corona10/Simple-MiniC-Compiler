@@ -1,9 +1,17 @@
-
+int add(int x, int y)
+{
+  int sum = 0;
+  sum = x + y;
+  return sum;
+}
 int main()
 {
   
-  int a= 5;
+  int a = 5;
   int b = 1; 
-  a =  a+b +3;
+   a = 6;  
+  add(a, b);  
   return 0;
 }
+
+
