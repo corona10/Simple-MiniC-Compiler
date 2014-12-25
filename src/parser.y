@@ -153,6 +153,10 @@ binary_ops :  TIDENT  OP binary_ops
                    $$ = new CBinaryOperator(val1, $2, $3);
                    
              }
+           | TIDENT OP function_call{
+                     CValue* val1 = new CValue("unknown", *$1);
+                     $$ = new CBinaryOperator(val1, $2, $3);
+              }
            | number OP number{
                    $$ = new CBinaryOperator($1, $2, $3);
              }
