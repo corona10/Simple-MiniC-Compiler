@@ -244,7 +244,9 @@ llvm::Value* CBinaryOperator::codeGenerate(CodeGenerator& codegen)
    Instruction::BinaryOps instruction;
    if(operation == TASSIGN)
    {
-      return new StoreInst(rvalue, ((LoadInst*)lvalue)->getPointerOperand(), false, codegen.getCurrentBlock());
+      Value* p_store =  new StoreInst(rvalue, ((LoadInst*)lvalue)->getPointerOperand(), false, codegen.getCurrentBlock());
+     // std::cout<<lvalue->getName().str()<<std::endl;
+      return p_store;
    }else if(operation == TPLUS)
    {
      instruction = Instruction::Add;
