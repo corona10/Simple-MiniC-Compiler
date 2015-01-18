@@ -244,8 +244,14 @@ llvm::Value* CBinaryOperator::codeGenerate(CodeGenerator& codegen)
    Instruction::BinaryOps instruction;
    if(operation == TASSIGN)
    {
-      Value* p_store =  new StoreInst(rvalue, ((LoadInst*)lvalue)->getPointerOperand(), false, codegen.getCurrentBlock());
+      Value* p_store = nullptr;
+      p_store =  new StoreInst(rvalue, ((LoadInst*)lvalue)->getPointerOperand(), false, codegen.getCurrentBlock());
      // std::cout<<lvalue->getName().str()<<std::endl;
+    if(codegen.getSymbolValue(lhs_name) != NULL)
+    {
+       codegen.insertSymbol(lhs_name, rvalue);
+      // return new StoreInst(rvalue,((LoadInst*)(codegen.getSymbolValue(lhs_name)))->getPointerOperand(), false, codegen.getCurrentBlock());
+    }
       return p_store;
    }else if(operation == TPLUS)
    {

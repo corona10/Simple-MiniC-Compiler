@@ -9,9 +9,10 @@ int main()
   
   int a = 3;
   int b = 1;
-  a = 3+ 2+ 1; 
-  add(a,b); 
- return a;
+  a = 3+ 2+ 1;
+  b = a + b; 
+  add(a,b);  
+ return b;
 }
 
 

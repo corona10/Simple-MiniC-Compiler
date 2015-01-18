@@ -480,8 +480,8 @@ static const yytype_uint8 yyrline[] =
        0,    60,    60,    62,    66,    71,    76,    81,    87,    88,
       90,    91,    94,    95,    96,    97,    99,   100,   103,   104,
      105,   107,   108,   109,   112,   116,   122,   126,   132,   132,
-     132,   132,   132,   132,   132,   134,   140,   144,   151,   156,
-     160,   163,   170,   171,   172,   174,   178
+     132,   132,   132,   132,   132,   134,   141,   145,   152,   158,
+     163,   166,   173,   174,   175,   177,   181
 };
 #endif
 
@@ -1488,86 +1488,89 @@ yyreduce:
     {
                      CValue* val1 = new CValue("unknown", *(yyvsp[-2].string));
                      (yyval.binary_op) = new CBinaryOperator(val1, (yyvsp[-1].token), (yyvsp[0].binary_op));
-                     
-               }
-#line 1494 "parser.cpp" /* yacc.c:1646  */
+                     (yyval.binary_op)->lhs_name = *(yyvsp[-2].string);
+                    // std::cout<<$$->lhs_name<<std::endl;
+             }
+#line 1495 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 141 "parser.y" /* yacc.c:1646  */
+#line 142 "parser.y" /* yacc.c:1646  */
     {
                     (yyval.binary_op) = new CBinaryOperator((yyvsp[-2].num), (yyvsp[-1].token), (yyvsp[0].binary_op));
               }
-#line 1502 "parser.cpp" /* yacc.c:1646  */
+#line 1503 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 144 "parser.y" /* yacc.c:1646  */
+#line 145 "parser.y" /* yacc.c:1646  */
     {
                       CValue* val1 = new CValue("unknown", *(yyvsp[-2].string));
                       CValue* val2 = new CValue("unknown", *(yyvsp[0].string));
                       (yyval.binary_op) = new CBinaryOperator(val1 , (yyvsp[-1].token) , val2);
-                      
-                      
+                      (yyval.binary_op)->lhs_name = *(yyvsp[-2].string);
+                    // std::cout<<$$->lhs_name<<std::endl; 
                    }
-#line 1514 "parser.cpp" /* yacc.c:1646  */
+#line 1515 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 151 "parser.y" /* yacc.c:1646  */
+#line 152 "parser.y" /* yacc.c:1646  */
     {
                    CValue* val1 = new CValue("unknown", *(yyvsp[-2].string));
                    (yyval.binary_op) = new CBinaryOperator(val1, (yyvsp[-1].token), (yyvsp[0].num));
-                   
+                   (yyval.binary_op)->lhs_name = *(yyvsp[-2].string);
+                  // std::cout<<$$->lhs_name<<std::endl;
              }
-#line 1524 "parser.cpp" /* yacc.c:1646  */
+#line 1526 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 156 "parser.y" /* yacc.c:1646  */
+#line 158 "parser.y" /* yacc.c:1646  */
     {
                      CValue* val1 = new CValue("unknown", *(yyvsp[-2].string));
                      (yyval.binary_op) = new CBinaryOperator(val1, (yyvsp[-1].token), (yyvsp[0].func_call));
+                     (yyval.binary_op)->lhs_name = *(yyvsp[-2].string);
               }
-#line 1533 "parser.cpp" /* yacc.c:1646  */
+#line 1536 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 160 "parser.y" /* yacc.c:1646  */
+#line 163 "parser.y" /* yacc.c:1646  */
     {
                    (yyval.binary_op) = new CBinaryOperator((yyvsp[-2].num), (yyvsp[-1].token), (yyvsp[0].num));
              }
-#line 1541 "parser.cpp" /* yacc.c:1646  */
+#line 1544 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 164 "parser.y" /* yacc.c:1646  */
+#line 167 "parser.y" /* yacc.c:1646  */
     {
                     CValue* val1 = new CValue("unknown", *(yyvsp[0].string));
                     (yyval.binary_op) = new CBinaryOperator((yyvsp[-2].num), (yyvsp[-1].token), val1);
                     
              }
-#line 1551 "parser.cpp" /* yacc.c:1646  */
+#line 1554 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 175 "parser.y" /* yacc.c:1646  */
+#line 178 "parser.y" /* yacc.c:1646  */
     {
            (yyval.num) = new CNumber("int", *(yyvsp[0].string));
         }
-#line 1559 "parser.cpp" /* yacc.c:1646  */
+#line 1562 "parser.cpp" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 179 "parser.y" /* yacc.c:1646  */
+#line 182 "parser.y" /* yacc.c:1646  */
     {
           (yyval.num) = new CNumber("fp", *(yyvsp[0].string));
         }
-#line 1567 "parser.cpp" /* yacc.c:1646  */
+#line 1570 "parser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1571 "parser.cpp" /* yacc.c:1646  */
+#line 1574 "parser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1795,5 +1798,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 185 "parser.y" /* yacc.c:1906  */
+#line 188 "parser.y" /* yacc.c:1906  */
 

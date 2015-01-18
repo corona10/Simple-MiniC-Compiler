@@ -135,8 +135,9 @@ binary_ops :  TIDENT  OP binary_ops
               {
                      CValue* val1 = new CValue("unknown", *$1);
                      $$ = new CBinaryOperator(val1, $2, $3);
-                     
-               }
+                     $$->lhs_name = *$1;
+                    // std::cout<<$$->lhs_name<<std::endl;
+             }
            |  number OP binary_ops
               {
                     $$ = new CBinaryOperator($1, $2, $3);
@@ -145,17 +146,19 @@ binary_ops :  TIDENT  OP binary_ops
                       CValue* val1 = new CValue("unknown", *$1);
                       CValue* val2 = new CValue("unknown", *$3);
                       $$ = new CBinaryOperator(val1 , $2 , val2);
-                      
-                      
+                      $$->lhs_name = *$1;
+                    // std::cout<<$$->lhs_name<<std::endl; 
                    }
            | TIDENT OP number{
                    CValue* val1 = new CValue("unknown", *$1);
                    $$ = new CBinaryOperator(val1, $2, $3);
-                   
+                   $$->lhs_name = *$1;
+                  // std::cout<<$$->lhs_name<<std::endl;
              }
            | TIDENT OP function_call{
                      CValue* val1 = new CValue("unknown", *$1);
                      $$ = new CBinaryOperator(val1, $2, $3);
+                     $$->lhs_name = *$1;
               }
            | number OP number{
                    $$ = new CBinaryOperator($1, $2, $3);

@@ -88,7 +88,8 @@ class CValue : public CBaseAST
      CValue(std::string ty, std::string val)
            : type(ty), value(val)
      {
-       
+       // std::cout<<val<<std::endl;
+     
      }
 
      virtual llvm::Value* codeGenerate(CodeGenerator& codegen);
@@ -97,6 +98,8 @@ class CValue : public CBaseAST
 class CBinaryOperator : public CBaseAST
 {
       public:
+      std::string lhs_name;
+      std::string rhs_name;
       CBaseAST* LHS;
       CBaseAST* RHS;
       int bin_op;
