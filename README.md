@@ -8,7 +8,7 @@ Master ![alt tag](https://magnum.travis-ci.com/corona10/Simple-MiniC-Compiler.sv
 # 현재 실행 가능한 소스코드 예제
   
 
-   ```<C++>
+   ```<cpp>
 int minus(int x, int y)
 {
    int result = 0;
