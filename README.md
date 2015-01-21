@@ -2,62 +2,15 @@ Travis Build Status
 ==============
 Master ![alt tag](https://magnum.travis-ci.com/corona10/Simple-MiniC-Compiler.svg?token=WuoJn3YfnHZ7RWX2jGYM&branch=master)
 
-Simple Mini C Compiler
-==============
-
-
-#Objective: Implementing a simple Mini C comiler with LLVM 3.5
 #프로젝트 목표
-  - LLVM 3.4(->3,5로 변경됨.)로 미니 C컴파일러를 구현해보자..
-  - 처음엔 완전한 c언어 구현이 목표였으나.. 아직 그 정도 만들능력은 안됨을 자각..
-  - 함수 호출하고 반복문 실행해서 put함수로 화면에 뿌리는 정도만 해보자..
-  - 할 수 있으면 scanf()정도까지 구현해볼까??
-# 진행상태
-  - 기타 구현은 계속 진행중
-  - .bc파일 자동으로 생성 (./result/ 디렉토리에..)
-  - .bc파일을 llvm 인터프리터로 실행가능
-  - .bc파일을 바이너리 파일 뽑아낼 계획임.
-  - 함수 호출 구현완료 2014/11/29
-  - 함수 매개변수 구현 완료  2014/12/02
-  - 이항연산 구현 완료.. 2014/12/15
-  - 함수의 변수 심볼테이블 구현 예정 2014/12/15
-
-# 문법 구현 상태
-  - int float double 형 변수 선언 가능
-    ex)
- 
-    '
-
-        int a;
-        int b = 5; 
-        float c = 4.5;
-
-    '
-   - 함수 정의 가능
-     ex)
- 
-     '
-
-         int sum()
-         {
-            int a = 3;
-            return a;
-         }
-     
-     '
-
-      int, double, float, void 형으로 정의 가능
-   - 함수 호출 구현 완료 
-   - 반복문 구현 (기능 구현 예정 중..)
-   - 내장함수 구현 중..( 기능 구현 중..)
-   
+  - LLVM 3.5 로 미니 C컴파일러를 구현해보자..
+       
 # 현재 실행 가능한 소스코드 예제
   
     **<예제 코드>**
 
 
-   '
-
+   ```<C++>
      int function_test(int hello)
      {
         return 1;
@@ -86,13 +39,12 @@ Simple Mini C Compiler
     }
 
 
-   '
-
+   ```
+  
     **<LLVM IR 코드 결과물>**
 
 
-   '
-
+   ```
     
      define i32 @function_test(i32 %hello) {
        entry:
@@ -123,7 +75,7 @@ Simple Mini C Compiler
      ret i32 0
    }
 
-   '
+  ```
 # License
 -----------------------------------------------------------------------------
 
