@@ -7,75 +7,36 @@ Master ![alt tag](https://magnum.travis-ci.com/corona10/Simple-MiniC-Compiler.sv
        
 # 현재 실행 가능한 소스코드 예제
   
-    **<예제 코드>**
-
 
    ```<C++>
-     int function_test(int hello)
-     {
-        return 1;
-     }
-  
-     float what()
-     {
-       return 3.5;
-     }
-    
-    int add(int x, float y)
-    {
-       int a =3;
-       return a;
-    }
-    
-    int main()
-    {
-  
-       int a= 5;
-       float c = 3.5;
-       what();
-       function_test(a);
-       add(a, c);
-       return 0;
-    }
+int minus(int x, int y)
+{
+   int result = 0;
+   result = x - y;
+   return result;
+}
 
+int add(int x, int y)
+{
+  int sum = 0;
+  sum = x + y;
+  return sum;
+}
 
+int main()
+{
+  
+  int a = 3;
+  int b = 1;
+  float c = 4.5;
+  a = 3+ 2+ 1;
+  b = a + b; 
+  add(a,b);
+  minus(a, b);  
+  return b;
+}  
+   
    ```
-  
-    **<LLVM IR 코드 결과물>**
-
-
-   ```
-    
-     define i32 @function_test(i32 %hello) {
-       entry:
-       ret i32 1
-     }
-
-     define float @what() {
-       entry:
-       ret float 3.500000e+00
-    }
-
-    define i32 @add(i32 %x, float %y) {
-       entry:
-       %a = alloca i32, align 4
-      store i32 3, i32* %a, align 4
-      ret i32 3
-   } 
-
-    define i32 @main() {
-      entry:
-      %a = alloca i32, align 4
-      store i32 5, i32* %a, align 4
-      %c = alloca float, align 4
-     store float 3.500000e+00, float* %c, align 4
-     %0 = call float @what()
-     %1 = call i32 @function_test(i32 5)
-     %2 = call i32 @add(i32 5, float 3.500000e+00)
-     ret i32 0
-   }
-
-  ```
 # License
 -----------------------------------------------------------------------------
 

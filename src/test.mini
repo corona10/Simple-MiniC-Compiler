@@ -1,3 +1,10 @@
+int minus(int x, int y)
+{
+   int result = 0;
+   result = x - y;
+   return result;
+}
+
 int add(int x, int y)
 {
   int sum = 0;
@@ -9,9 +16,11 @@ int main()
   
   int a = 3;
   int b = 1;
+  float c = 4.5;
   a = 3+ 2+ 1;
   b = a + b; 
-  add(a,b);  
+  add(a,b);
+  minus(a, b);  
  return b;
 }
 
