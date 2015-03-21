@@ -82,7 +82,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 12 "parser.y" /* yacc.c:1909  */
+#line 57 "parser.y" /* yacc.c:1909  */
 
    int token;
    std::string *string;

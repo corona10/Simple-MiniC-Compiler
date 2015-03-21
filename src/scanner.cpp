@@ -494,7 +494,50 @@ int yy_flex_debug = 0;
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
 #line 1 "scanner.l"
-#line 2 "scanner.l"
+/**
+The MIT License (MIT)
+
+
+
+Copyright (c) 2014-2015 Dong-hee,Na
+
+
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+
+of this software and associated documentation files (the "Software"), to deal
+
+in the Software without restriction, including without limitation the rights
+
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+
+copies of the Software, and to permit persons to whom the Software is
+
+furnished to do so, subject to the following conditions:
+
+
+
+The above copyright notice and this permission notice shall be included in
+
+all copies or substantial portions of the Software.
+
+
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+
+THE SOFTWARE
+**/
+#line 45 "scanner.l"
 #include "AST.hpp"
 #include <iostream>
 #include <cstdlib>
@@ -502,7 +545,7 @@ char *yytext;
 #define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
 #define  TOKEN(t) (yylval.token = t)
 extern "C" int yywrap(){}
-#line 506 "scanner.cpp"
+#line 549 "scanner.cpp"
 
 #define INITIAL 0
 
@@ -716,10 +759,10 @@ YY_DECL
 		}
 
 	{
-#line 11 "scanner.l"
+#line 54 "scanner.l"
 
 
-#line 723 "scanner.cpp"
+#line 766 "scanner.cpp"
 
 	while ( 1 )		/* loops until end-of-file is reached */
 		{
@@ -778,151 +821,151 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "scanner.l"
+#line 56 "scanner.l"
 SAVE_TOKEN; return TINT;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 14 "scanner.l"
+#line 57 "scanner.l"
 SAVE_TOKEN; return TFLOAT;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "scanner.l"
+#line 58 "scanner.l"
 SAVE_TOKEN; return TDOUBLE;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "scanner.l"
+#line 59 "scanner.l"
 SAVE_TOKEN; return TVOID;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 17 "scanner.l"
+#line 60 "scanner.l"
 SAVE_TOKEN; return TRETURN;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 18 "scanner.l"
+#line 61 "scanner.l"
 return TOKEN(TASSIGN);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 19 "scanner.l"
+#line 62 "scanner.l"
 return TOKEN(TEQUAL);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 20 "scanner.l"
+#line 63 "scanner.l"
 return TOKEN(TNOT);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 21 "scanner.l"
+#line 64 "scanner.l"
 return TOKEN(TNEQUAL);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 22 "scanner.l"
+#line 65 "scanner.l"
 return TOKEN(TLESS);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 23 "scanner.l"
+#line 66 "scanner.l"
 return TOKEN(TLESSEQ);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 24 "scanner.l"
+#line 67 "scanner.l"
 return TOKEN(TGREAT);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 25 "scanner.l"
+#line 68 "scanner.l"
 return TOKEN(TGREATEQ);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 26 "scanner.l"
+#line 69 "scanner.l"
 SAVE_TOKEN; return TIDENT;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 27 "scanner.l"
+#line 70 "scanner.l"
 SAVE_TOKEN; return TINT_VALUE;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 28 "scanner.l"
+#line 71 "scanner.l"
 SAVE_TOKEN; return TFLOAT_VALUE;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 29 "scanner.l"
+#line 72 "scanner.l"
 return TOKEN(TLBRACE);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 30 "scanner.l"
+#line 73 "scanner.l"
 return TOKEN(TRBRACE);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 31 "scanner.l"
+#line 74 "scanner.l"
 return TOKEN(TLSBRACE);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 32 "scanner.l"
+#line 75 "scanner.l"
 return TOKEN(TRSBRACE);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 33 "scanner.l"
+#line 76 "scanner.l"
 return TOKEN(TPLUS);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 34 "scanner.l"
+#line 77 "scanner.l"
 return TOKEN(TMINUS);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 35 "scanner.l"
+#line 78 "scanner.l"
 return TOKEN(TMUL);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 36 "scanner.l"
+#line 79 "scanner.l"
 return TOKEN(TDIVIDE);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 37 "scanner.l"
+#line 80 "scanner.l"
 return TOKEN(TMODULO);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 38 "scanner.l"
+#line 81 "scanner.l"
 return TOKEN(TSEMI);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 39 "scanner.l"
+#line 82 "scanner.l"
 return TOKEN(TCOMMA);
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 40 "scanner.l"
+#line 83 "scanner.l"
 ;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 41 "scanner.l"
+#line 84 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 926 "scanner.cpp"
+#line 969 "scanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1917,7 +1960,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 40 "scanner.l"
+#line 83 "scanner.l"
 
 
 
@@ -2005,7 +2048,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 12 "parser.y" /* yacc.c:1909  */
+#line 57 "parser.y" /* yacc.c:1909  */
 
    int token;
    std::string *string;

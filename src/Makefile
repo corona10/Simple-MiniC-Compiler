@@ -13,4 +13,4 @@ scanner.cpp: scanner.l parser.hpp
 	flex -o $@ $^
 
 smcc: parser.cpp main.cpp scanner.cpp
-	g++ -g -o  smcc *.cpp -std=c++0x `llvm-config --libs core BitWriter native --cxxflags --ldflags` -lpthread -lffi -ldl -lm -ltinfo -O3
+	g++ -g -o  smcc *.cpp  -std=c++0x `llvm-config --libs core BitWriter native --cxxflags --ldflags` -lpthread -lffi -ldl -lm -ltinfo -O3
