@@ -1,6 +1,6 @@
 Travis Build Status
 ==============
-Master ![alt tag](https://magnum.travis-ci.com/corona10/Simple-MiniC-Compiler.svg?token=WuoJn3YfnHZ7RWX2jGYM&branch=master)
+[![Build Status](https://travis-ci.org/corona10/Simple-MiniC-Compiler.svg?branch=master)](https://travis-ci.org/corona10/Simple-MiniC-Compiler)
 
 #프로젝트 목표
   - (Simple Implementation of Mini C Compiler with LLVM)
